@@ -1,0 +1,245 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+  background-color: hsl(var(--background));
+  color: hsl(var(--foreground));
+}
+
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+
+    /* colors general */
+    --color-light-grey: #f9f8fa;
+
+    /* edition DE */
+    --color-de-primary-500: #b65033;
+    --color-de-primary-300: #f49e6e;
+
+    /* edition CH */
+    --color-ch-primary-500: #535353;
+    --color-ch-primary-300: #c1c1c1;
+
+    /* edition DACH */
+    --color-dach-primary-500: #866a41;
+    --color-dach-primary-300: #bca679;
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+@layer components {
+  .border-gradient-de {
+    position: relative;
+  }
+
+  .border-gradient-de::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 2px; /* border width */
+    background: linear-gradient(90deg, #b64f32 0.21%, #f49e6e 100%);
+    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .btn-primary {
+    @apply font-montserrat font-bold uppercase text-center text-white bg-black p-5 text-[16px] leading-normal;
+  }
+
+  .btn-primary-s {
+    @apply font-montserrat font-bold uppercase text-center text-white bg-black py-2 px-5 md:p-5 text-[12px] md:text-[16px] leading-normal;
+  }
+
+  .btn-primary-hover-de {
+    @apply hover:bg-[linear-gradient(98deg,var(--color-de-primary-300).62%,var(--color-de-primary-500)_110.28%)];
+  }
+
+  .btn-secondary {
+    @apply font-montserrat font-bold uppercase text-center bg-transparent border-2 p-5 text-[16px] leading-normal;
+  }
+
+  .btn-secondary-hover {
+    @apply hover:border-white hover:bg-black;
+  }
+  .btn-secondary-hover-de {
+    @apply hover:border-gradient-de hover:gradient-de-text hover:border-transparent;
+  }
+
+  .btn-socialmedia {
+    @apply w-14 h-14 flex justify-center items-center bg-transparent border-2 p-4;
+  }
+
+  .heading-1-lg {
+    @apply font-ogg font-normal leading-[1.1] lg:leading-none text-[40px] md:text-[40px] lg:text-[64px];
+  }
+
+  .heading-2-lg {
+    @apply font-ogg font-normal leading-[1.08] text-[30px] md:text-[40px] lg:text-[48px];
+  }
+
+  .heading-3-lg {
+    @apply font-ogg font-normal leading-[1.15] md:leading-[1.1] text-[26px] md:text-[30px] lg:text-[38px];
+  }
+
+  .heading-4-lg {
+    @apply font-ogg font-normal leading-tight text-[24px] lg:text-[32px];
+  }
+
+  .heading-5-lg {
+    @apply font-ogg font-normal leading-[1.33333] text-[20px] lg:text-[26px];
+  }
+
+  .bodycopy-1-lg {
+    @apply font-gte font-light leading-[1.2] lg:leading-[1.33333] text-[20px] lg:text-[24px];
+  }
+
+  .bodycopy-2-lg {
+    @apply font-gte font-light leading-[1.2] text-[18px] lg:text-[20px];
+  }
+
+  .bodycopy-3-lg {
+    @apply font-gte font-light leading-[1.25] text-[16px];
+  }
+
+  .bodycopy-4-lg {
+    @apply font-gte font-light leading-[1.14286] text-[14px];
+  }
+
+  .bodycopy-1-lg-highlighted {
+    @apply font-gte font-medium leading-[1.2] lg:leading-[1.33333] text-[20px] lg:text-[24px];
+  }
+
+  .bodycopy-2-lg-highlighted {
+    @apply font-gte font-medium leading-[1.2] text-[18px] lg:text-[20px];
+  }
+
+  .bodycopy-3-lg-highlighted {
+    @apply font-gte font-medium leading-[1.25] text-[16px];
+  }
+
+  .quote-sm {
+    @apply font-gte italic font-light leading-tight text-[24px] lg:text-[32px];
+  }
+
+  .button-1-lg {
+    @apply font-montserrat font-bold uppercase text-[16px] leading-normal;
+  }
+
+  .button-3-lg {
+    @apply font-montserrat font-bold uppercase text-center text-[12px] leading-normal;
+  }
+
+  .button-4-lg {
+    @apply font-montserrat font-bold text-center text-[12px] leading-normal;
+  }
+
+  .label-lg {
+    @apply font-montserrat font-bold text-[16px] md:text-[18px] leading-[0.8888];
+  }
+
+  .navigation-menu-lg {
+    @apply font-montserrat font-bold uppercase text-[16px] leading-[1.5];
+  }
+
+  .navigation-breadcrumb-lg {
+    @apply font-montserrat font-normal text-[14px] leading-[1.43];
+  }
+
+  .inputfield-label-lg {
+    @apply font-montserrat font-semibold text-[14px] md:text-[18px] leading-[0.889];
+  }
+
+  .tab-label-idle {
+    @apply font-montserrat font-semibold text-[18px] capitalize leading-[1.33333];
+  }
+
+  .tab-label-active {
+    @apply font-montserrat font-bold text-[22px] capitalize leading-[1.09091];
+  }
+
+  .badge-label {
+    @apply font-montserrat font-bold text-[12px] uppercase leading-none;
+  }
+}
+
+@layer utilities {
+  .gradient-de-text {
+    @apply bg-gradient-de bg-clip-text text-transparent;
+  }
+
+  .gradient-ch-text {
+    @apply bg-gradient-ch bg-clip-text text-transparent;
+  }
+
+  .gradient-dach-text {
+    @apply bg-gradient-dach bg-clip-text text-transparent;
+  }
+  .container-primary {
+    @apply mx-auto max-w-[1440px];
+  }
+}
