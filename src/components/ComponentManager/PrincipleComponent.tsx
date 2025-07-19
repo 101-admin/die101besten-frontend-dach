@@ -22,10 +22,10 @@ const PrincipleComponent = ({
   return (
     <div
       onClick={switchHanddle}
-      className="w-full flex justify-between items-start py-5 md:py-10 border-b border-[#B65033] cursor-pointer"
+      className="w-full flex justify-between items-start py-5 md:py-10 border-b border-[#866A41] cursor-pointer"
     >
       <div className="flex justify-start items-start gap-5 md:gap-10 w-full">
-        <div className="w-10 h-10 md:w-16 md:h-16 bg-[linear-gradient(90deg,#B65033_0.21%,#F49E6E_100%)] flex justify-center items-center font-gte font-bold text-[20px] sm:text-[24px] text-white">
+        <div className="w-10 h-10 md:w-16 md:h-16 bg-gradient-to-r from-[#866A41] to-[#BCA679] flex justify-center items-center font-gte font-bold text-[20px] sm:text-[24px] text-white">
           {index + 1}.
         </div>
         <div className="flex flex-col justify-start items-baseline gap-2 w-[70%] sm:w-[80%]">

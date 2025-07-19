@@ -10,7 +10,7 @@ interface ColoredTextProps {
 
 export const ColoredText: React.FC<ColoredTextProps> = ({
   text = "some # text",
-  color = "#B65033",
+  color = "#866A41",
   className = "",
   symbol = "#",
 }) => {
@@ -44,7 +44,7 @@ export const ColoredText: React.FC<ColoredTextProps> = ({
             <span
               key={index}
               className={cn(
-                "bg-gradient-to-r from-[#B64F32] to-[#F49E6E] text-transparent bg-clip-text box-decoration-clone",
+                "bg-gradient-to-r from-[#866A41] to-[#BCA679] text-transparent bg-clip-text box-decoration-clone",
                 className
               )}
             >

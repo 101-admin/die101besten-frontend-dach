@@ -58,7 +58,7 @@ const LatestArticles = ({ data }: { data?: ArticleSection }) => {
                         </div>
                         <div className="p-4">
                           {category && (
-                            <span className="text-xs uppercase font-montserrat font-bold bg-gradient-to-r from-[#B65033] to-[#F49E6E] text-white px-2 py-1 rounded-md">
+                            <span className="text-xs uppercase font-montserrat font-bold bg-gradient-to-r from-[#866A41] to-[#BCA679] text-white px-2 py-1 rounded-md">
                               {category?.[0]?.title}
                             </span>
                           )}

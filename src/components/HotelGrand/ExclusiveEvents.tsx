@@ -59,7 +59,7 @@ const ExclusiveEvents = ({ events, title }: HotelEvents) => {
                       </div>
                       <div className="p-4">
                         {subtitle && (
-                          <span className="text-xs uppercase font-montserrat font-bold bg-gradient-to-r from-[#B65033] to-[#F49E6E] text-white px-2 py-1 rounded-md">
+                          <span className="text-xs uppercase font-montserrat font-bold bg-gradient-to-r from-[#866A41] from to-[#BCA679] text-white px-2 py-1 rounded-md">
                             {subtitle}
                           </span>
                         )}

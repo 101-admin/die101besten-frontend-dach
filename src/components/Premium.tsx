@@ -53,7 +53,7 @@ export default function Premium({
 
             {city && (
               <h3 className="font-gte font-[350] text-[20px] lg:text-[24px] leading-[24px] sm:leading-[32px] mb-1">
-                {country}, {city}.
+                {country}, {city}
               </h3>
             )}
             {name && (

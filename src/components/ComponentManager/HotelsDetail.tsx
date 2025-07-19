@@ -57,7 +57,7 @@ const HotelsDetail = ({
                     </h2>
                   )}
                   {latestEvent?.name && (
-                    <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#B64F32] group-hover:to-[#F49E6E] group-hover:text-transparent group-hover:bg-clip-text">
+                    <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#866A41] group-hover:to-[#BCA679] group-hover:text-transparent group-hover:bg-clip-text">
                       {latestEvent?.name}
                     </h1>
                   )}
@@ -93,7 +93,7 @@ const HotelsDetail = ({
                         </h2>
                       )}
                       {name && (
-                        <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#B64F32] group-hover:to-[#F49E6E] group-hover:text-transparent group-hover:bg-clip-text">
+                        <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#866A41] group-hover:to-[#BCA679] group-hover:text-transparent group-hover:bg-clip-text">
                           {name}
                         </h1>
                       )}

@@ -23,7 +23,7 @@ const Principles = ({
           </h1>
         )}
         {subTitle && (
-          <h3 className="mb-5 text-[18px] md:text-[20px] lg:text-[24px] font-gte font-bold bg-gradient-to-r from-[#B65033] to-[#F49E6E] text-transparent bg-clip-text">
+          <h3 className="mb-5 text-[18px] md:text-[20px] lg:text-[24px] font-gte font-bold bg-gradient-to-r from-[#866A41] to-[#BCA679] text-transparent bg-clip-text">
             {subTitle}
           </h3>
         )}

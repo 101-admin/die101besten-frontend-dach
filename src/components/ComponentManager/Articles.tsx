@@ -62,7 +62,7 @@ const Articles = ({
                         <div className="absolute top-0 left-0 w-full h-full hidden group-hover/show:flex flex-col justify-start items-baseline bg-[#000000B2]">
                           <div className="w-full h-full flex flex-col justify-start items-baseline  pt-32 pl-12 pr-10">
                             {category && (
-                              <h2 className="px-2 py-[1px] bg-gradient-to-r from-[#F49E6E] to-[#B64F32] text-center text-white rounded-lg text-[12px] font-Montserrat font-bold leading-[24px] mb-3 uppercase">
+                              <h2 className="px-2 py-[1px] bg-gradient-to-r from-[#866A41] to-[#BCA679] text-center text-white rounded-lg text-[12px] font-Montserrat font-bold leading-[24px] mb-3 uppercase">
                                 {category?.[0]?.title}
                               </h2>
                             )}
@@ -71,7 +71,7 @@ const Articles = ({
                                 {description}
                               </p>
                             )}
-                            <button className="max-w-[300] w-full h-[64px] font-Montserrat font-bold text-[16px] text-white bg-gradient-to-r from-[#F49E6E] to-[#B64F32] leading-[24px] text-center  uppercase">
+                            <button className="max-w-[300] w-full h-[64px] font-Montserrat font-bold text-[16px] text-white bg-gradient-to-r from-[#866A41] to-[#BCA679] leading-[24px] text-center  uppercase">
                               Weiterlesen
                             </button>
                           </div>

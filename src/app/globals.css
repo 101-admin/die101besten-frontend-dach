@@ -101,7 +101,7 @@ body {
     position: absolute;
     inset: 0;
     padding: 2px; /* border width */
-    background: linear-gradient(90deg, #b64f32 0.21%, #f49e6e 100%);
+    background: linear-gradient(90deg, var(--color-dach-primary-300) 0.21%, var(--color-dach-primary-500) 100%);
     mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
@@ -116,7 +116,7 @@ body {
   }
 
   .btn-primary-hover-de {
-    @apply hover:bg-[linear-gradient(98deg,var(--color-de-primary-300).62%,var(--color-de-primary-500)_110.28%)];
+    @apply hover:bg-[linear-gradient(98deg,var(--color-dach-primary-300).62%,var(--color-dach-primary-500)_110.28%)];
   }
 
   .btn-secondary {
@@ -127,7 +127,7 @@ body {
     @apply hover:border-white hover:bg-black;
   }
   .btn-secondary-hover-de {
-    @apply hover:border-gradient-de hover:gradient-de-text hover:border-transparent;
+    @apply hover:border-gradient-de hover:gradient-dach-text hover:border-transparent;
   }
 
   .btn-socialmedia {

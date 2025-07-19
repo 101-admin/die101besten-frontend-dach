@@ -74,13 +74,16 @@ const Form = () => {
                   className="min-w-8 min-h-8 border-2 border-black rounded-none"
                 />
                 <span className="bodycopy-4-lg text-black">
-                  Ich bin damit einverstanden, dass die &quot;Die 101
-                  Besten&quot; - Institute for Service- and Leadership
-                  Excellence AG mich regelmäßig per E-Mail-Newsletter über
-                  aktuelle Angebote und andere Neuigkeiten zu Werbezwecken
-                  informiert. Meine Einwilligung kann ich jederzeit mit Wirkung
-                  für die Zukunft widerrufen. Es gilt die Datenschutzerklärung (
-                  https://die-101- besten.de/datenschutz).
+                  Ich bin mit der Verarbeitung meiner Daten im Rahmen des
+                  Kontaktformulars einverstanden. Es gilt die
+                  Datenschutzerklärung{" "}
+                  <Link
+                    target="_blank"
+                    className="underline"
+                    href="https://die-101-besten.de/datenschutz"
+                  >
+                    (https://die-101-besten.de/datenschutz).
+                  </Link>
                 </span>
               </label>
 
@@ -96,20 +99,20 @@ const Form = () => {
             target="_blank"
             className="btn-socialmedia group text-black border-black hover:border-none hover:border-gradient-de"
           >
-            <FaFacebookF className="text-[20px] group-hover:text-[#B65033]" />
+            <FaFacebookF className="text-[20px] group-hover:text-[#866A41]" />
           </Link>
           <Link
             href="https://www.instagram.com/die101bestenhotels/"
             className="btn-socialmedia group text-black border-black hover:border-none hover:border-gradient-de"
           >
-            <FaInstagram className="text-[20px] group-hover:text-[#B65033]" />
+            <FaInstagram className="text-[20px] group-hover:text-[#866A41]" />
           </Link>
           <Link
             href="https://www.linkedin.com/company/86932290/admin/"
             target="_blank"
             className="btn-socialmedia group text-black border-black hover:border-none hover:border-gradient-de"
           >
-            <FaLinkedin className="text-[20px] group-hover:text-[#B65033]" />
+            <FaLinkedin className="text-[20px] group-hover:text-[#866A41]" />
           </Link>
         </div>
       </div>

@@ -208,7 +208,7 @@ const CarouselPrevious = React.forwardRef<
       ref={ref}
       variant={variant}
       size={size}
-      className='w-16 h-16 bg-black text-white hover:bg-black hover:text-white text-[24px] hover:bg-[linear-gradient(98deg,#F49E6E_6.62%,#B64F32_110.28%)] active:scale-[1] duration-200 pointer border-none rounded-none'
+      className='w-16 h-16 bg-black text-white hover:bg-black hover:text-white text-[24px] hover:bg-gradient-to-r from-[#866A41] to-[#BCA679]  active:scale-[1] duration-200 pointer border-none rounded-none'
       onClick={scrollPrev}
       {...props}
     >
@@ -230,7 +230,7 @@ const CarouselNext = React.forwardRef<
       ref={ref}
       variant={variant}
       size={size}
-      className='w-16 h-16 bg-black text-white hover:bg-black hover:text-white text-[24px] hover:bg-[linear-gradient(98deg,#F49E6E_6.62%,#B64F32_110.28%)] active:scale-[1] duration-200 border-none rounded-none'
+      className='w-16 h-16 bg-black text-white hover:bg-black hover:text-white text-[24px] hover:bg-gradient-to-r from-[#866A41] to-[#BCA679] active:scale-[1] duration-200 border-none rounded-none'
       disabled={!canScrollNext}
       onClick={scrollNext}
       {...props}
