@@ -78,7 +78,7 @@ const Events = ({
                               </h2>
                             )}
                             {title && (
-                              <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#B64F32] group-hover:to-[#F49E6E] group-hover:text-transparent group-hover:bg-clip-text">
+                              <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#866A41] group-hover:to-[#BCA679] group-hover:text-transparent group-hover:bg-clip-text">
                                 {title}
                               </h1>
                             )}
@@ -140,7 +140,7 @@ const Events = ({
                         </div>
                         <div className="max-w-[352px] w-full flex flex-col justify-start items-baseline gap-2">
                           {title && (
-                            <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#B64F32] group-hover:to-[#F49E6E] group-hover:text-transparent group-hover:bg-clip-text">
+                            <h1 className="font-ogg line-clamp-2 text-[23px] sm:text-[32px] leading-[32px] sm:leading-[40px] group-hover:bg-gradient-to-r group-hover:from-[#866A41] group-hover:to-[#BCA679] group-hover:text-transparent group-hover:bg-clip-text">
                               {title}
                             </h1>
                           )}

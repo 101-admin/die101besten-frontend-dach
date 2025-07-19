@@ -39,7 +39,7 @@ const SimpleMapSection = ({
         <div className="w-full max-w-[1100px] flex flex-col justify-start items-baseline">
           {mapSection?.contactInfo && (
             <div className="w-full max-w-[376px] flex flex-col justify-start items-baseline p-6 sm:p-9 md:p-12 bg-white gap-2">
-              <h2 className="font-ogg font-normal text-[22px] bg-gradient-to-r from-[#B65033] from-50% to-[#F49E6E] bg-clip-text text-transparent">
+              <h2 className="font-ogg font-normal text-[22px] bg-gradient-to-r from-[#866A41] from-50% to-[#BCA679] bg-clip-text text-transparent">
                 Buchung und Kontakt
               </h2>
               <p className="text-[16px] font-gte font-[350]">
@@ -85,7 +85,7 @@ const LocationMap = ({
   address,
   ctaButton,
 }: {
-  hotelId?: number;
+  hotelId?: string;
   mapSection: HotelMapSection;
   name?: string;
   address?: HotelAddress;

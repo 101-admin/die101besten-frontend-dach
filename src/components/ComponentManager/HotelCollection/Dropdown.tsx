@@ -3,7 +3,6 @@ import React, { useState, Suspense } from "react";
 // import { MdKeyboardArrowRight } from "react-icons/md";
 import { LuSearch } from "react-icons/lu";
 import { useRouter, useSearchParams } from "next/navigation";
-import { DEFAULT_EDITION } from "@/lib/config/sanity";
 import {
   Select,
   SelectContent,
@@ -66,42 +65,45 @@ const DropdownContent = ({
         </div> */}
         <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5">
           Die 101 besten Hotels{" "}
-          <span className="text-[#B65033]">Deutschland</span>
+          <span className="bg-gradient-to-r from-[#866A41] to-[#866A41] bg-clip-text text-transparent">
+            DACH-Region & Südtirol
+          </span>
         </h1>
         <div
-          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 ${
-            DEFAULT_EDITION === "deutschland"
-              ? "xl:grid-cols-3"
-              : "xl:grid-cols-4"
-          }`}
+          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 xl:grid-cols-4`}
         >
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Ranking Edition
             </h3>
             <Select
-              defaultValue={searchParams.get("edition") || ""}
-              // onValueChange={(value) => updateSearchParams("edition", value)}
+              defaultValue=""
+              onValueChange={(url) => {
+                if (url) {
+                  window.location.href = url;
+                }
+              }}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Deutschland" />
+                <SelectValue placeholder="DACH + Südtirol" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="deutschland">Deutschland</SelectItem>
-                  <SelectItem value=" dachSüdtirol">
-                    {" "}
+                  <SelectItem value="https://die-new.vercel.app/hotels">
+                    Deutschland
+                  </SelectItem>
+                  <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/hotels">
                     DACH + Südtirol
                   </SelectItem>
-                  <SelectItem value="schweiz">Schweiz</SelectItem>
+                  <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/hotels">
+                    Schweiz
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
           </div>
           <div
-            className={`w-full  flex-col justify-start items-baseline gap-1 ${
-              DEFAULT_EDITION === "deutschland" ? "hidden" : "flex"
-            }`}
+            className={`w-full flex flex-col justify-start items-baseline gap-1`}
           >
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Hotel Segment
@@ -111,11 +113,11 @@ const DropdownContent = ({
               onValueChange={(value) => updateSearchParams("segment", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Bitte wählen" />
+                <SelectValue placeholder="Alle Segmente" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="bittewählen">Bitte wählen</SelectItem>
+                  <SelectItem value="bittewählen">Alle Segmente</SelectItem>
                   <SelectItem value="leisure">Leisure</SelectItem>
                   <SelectItem value="business">Business</SelectItem>
                 </SelectGroup>

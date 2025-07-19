@@ -67,7 +67,7 @@ const SingleMember = ({
               </p>
             )}
             {readmore && (
-              <button className="font-bold font-montserrat text-[12px] group-hover:text-[#B65033]">
+              <button className="font-bold font-montserrat text-[12px] group-hover:text-[#866A41]">
                 {readmore}
               </button>
             )}

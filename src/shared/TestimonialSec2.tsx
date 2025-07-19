@@ -9,7 +9,7 @@ const TestimonialSec2 = ({ author, review }: Testimonial) => {
         <div className="w-full flex justify-start items-baseline">
           <img
             className="max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
-            src="/images/TestiIcon.svg"
+            src="/Logos/open-dach.svg"
             alt=""
           />
         </div>
@@ -21,7 +21,7 @@ const TestimonialSec2 = ({ author, review }: Testimonial) => {
         <div className="w-[90%] flex justify-end items-baseline lg:mt-[-30px]">
           <img
             className="rotate-180 max-w-[30px] sm:max-w-[40px] md:max-w-[55px]  lg:max-w-[74px]"
-            src="/images/TestiIcon.svg"
+            src="/Logos/close-dach.svg"
             alt=""
           />
         </div>

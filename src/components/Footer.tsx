@@ -31,9 +31,9 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
               <Link
                 target="_blank"
                 href={`${footerData?.kontakt?.emailLink}`}
-                className="flex items-center gap-3 group text-black hover:bg-gradient-to-l from-[#F49E6E] to-[#B64F32] hover:text-transparent hover:bg-clip-text cursor-pointer"
+                className="flex items-center gap-3 group text-black hover:bg-gradient-to-l from-[#BCA679] to-[#866A41] hover:text-transparent hover:bg-clip-text cursor-pointer"
               >
-                <MdOutlineMailOutline className="text-[22px] group-hover:text-[#B64F32]" />
+                <MdOutlineMailOutline className="text-[22px] group-hover:text-[#866A41]" />
                 <h2 className="font-Montserrat font-bold text-[14px]">
                   {footerData?.kontakt?.emailText}
                 </h2>
@@ -50,13 +50,13 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                     <div key={index}>
                       {item?.newTab ? (
                         <Link key={index} target="_blank" href={`${item?.url}`}>
-                          <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <li className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </li>
                         </Link>
                       ) : (
                         <Link key={index} href={`${item?.url}`}>
-                          <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <li className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </li>
                         </Link>
@@ -77,13 +77,13 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                     <div key={index}>
                       {item?.newTab ? (
                         <Link key={index} target="_blank" href={`${item?.url}`}>
-                          <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <li className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </li>
                         </Link>
                       ) : (
                         <Link key={index} href={`${item?.url}`}>
-                          <li className="text-[14px] font-light font-gte  hover:text-[#B65033] cursor-pointer">
+                          <li className="text-[14px] font-light font-gte  hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </li>
                         </Link>
@@ -104,13 +104,13 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                     <div key={index}>
                       {item?.newTab ? (
                         <Link key={index} target="_blank" href={`${item?.url}`}>
-                          <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <li className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </li>
                         </Link>
                       ) : (
                         <Link key={index} href={`${item?.url}`}>
-                          <li className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <li className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </li>
                         </Link>
@@ -134,7 +134,7 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                 <div key={index}>
                   {item?.label === "Cookies" ? (
                     <Link href="#" data-cc="c-settings">
-                      <div className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                      <div className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                         {item?.label}
                       </div>
                     </Link>
@@ -142,7 +142,7 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
                     <div>
                       {item?.newTab && (
                         <Link target="_blank" href={`${item?.url}`}>
-                          <div className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <div className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </div>
                         </Link>
@@ -150,7 +150,7 @@ const Footer = ({ footer }: { footer: Footer[] }) => {
 
                       {!item?.newTab && (
                         <Link key={index} href={`${item?.url}`}>
-                          <div className="text-[14px] font-light font-gte   hover:text-[#B65033] cursor-pointer">
+                          <div className="text-[14px] font-light font-gte   hover:text-[#866A41] cursor-pointer">
                             {item?.label}
                           </div>
                         </Link>

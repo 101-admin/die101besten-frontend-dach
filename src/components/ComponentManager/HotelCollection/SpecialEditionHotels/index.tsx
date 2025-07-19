@@ -80,23 +80,23 @@ const SpecialEditionHotelsContent = ({
               <button
                 key={index}
                 onClick={() => BtnHandle(index)}
-                className={`flex gap-2 items-center pb-3 px-3 border-[#B65033] group ${
+                className={`flex gap-2 items-center pb-3 px-3 border-[#866A41] group ${
                   index == idx ? "border-b-2" : "border-none"
                 }`}
               >
                 <h2
-                  className={`font-montserrat font-semibold  leading-[24px] group-hover:text-[#B65033] duration-200 ${
+                  className={`font-montserrat font-semibold  leading-[24px] group-hover:text-[#866A41] duration-200 ${
                     index == idx
-                      ? "text-[#B65033] text-[20px] sm:text-[22px]"
+                      ? "text-[#866A41] text-[20px] sm:text-[22px]"
                       : "text-[18px]"
                   }`}
                 >
                   {button.title}
                 </h2>
                 <div
-                  className={`w-6 h-6 flex justify-center items-center rounded-sm text-[15px] font-montserrat font-semibold group-hover:text-white group-hover:bg-[linear-gradient(90deg,#B65033_0.21%,#F49E6E_100%)] duration-200 ${
+                  className={`w-6 h-6 flex justify-center items-center rounded-sm text-[15px] font-montserrat font-semibold group-hover:text-white group-hover:bg-gradient-to-r from-[#866A41] to-[#BCA679] duration-200 ${
                     index == idx
-                      ? "bg-[linear-gradient(90deg,#B65033_0.21%,#F49E6E_100%)] text-white"
+                      ? "bg-gradient-to-r from-[#866A41] to-[#BCA679] text-white"
                       : "bg-[#f0f0f0] "
                   }`}
                 >

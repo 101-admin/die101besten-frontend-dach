@@ -1,12 +1,12 @@
 "use client";
 import React, { useState, Suspense } from "react";
-import { FiSearch } from "react-icons/fi";
+// import { FiSearch } from "react-icons/fi";
 // import { FaBars } from "react-icons/fa6";
 import { AiOutlineClose } from "react-icons/ai";
 import Link from "next/link";
-import { IoClose } from "react-icons/io5";
+// import { IoClose } from "react-icons/io5";
 import Edition from "@/Data/Edition";
-import { useRouter, useSearchParams } from "next/navigation";
+// import { useRouter, useSearchParams } from "next/navigation";
 
 import {
   Carousel,
@@ -17,34 +17,35 @@ import {
 const NavbarContent = ({ navbar }) => {
   const navbarData = navbar[0];
   // console.log(navbarData, "navbarData");
-  const [text, setText] = useState("");
-  const [displayText, setDisplayText] = useState("");
+  // const [text, setText] = useState("");
+  // const [displayText, setDisplayText] = useState("");
   const [barBtn, setBarBtn] = useState(true);
   const [search, setSearch] = useState(false);
-  const [displaySearch, setdisplaySearch] = useState(true);
+  // const [displaySearch, setdisplaySearch] = useState(true);
   const [menu, setMenu] = useState(false);
-  const [editionIndex, setEditionIndex] = useState(0);
+  const [editionIndex, setEditionIndex] = useState(1);
   const [showEdition, setShowEdition] = useState(false);
+  const [initialSlide, setInitialSlide] = useState(1);
 
-  const router = useRouter();
-  const searchParams = useSearchParams();
+  // const router = useRouter();
+  // const searchParams = useSearchParams();
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
-  const handleSearch = () => {
-    if (search) {
-      setSearch(false);
-      setMenu(false);
-    } else {
-      setSearch(true);
-      setMenu(false);
-      if (barBtn === false) {
-        setBarBtn(true);
-      }
-    }
-  };
+  // const handleSearch = () => {
+  //   if (search) {
+  //     setSearch(false);
+  //     setMenu(false);
+  //   } else {
+  //     setSearch(true);
+  //     setMenu(false);
+  //     if (barBtn === false) {
+  //       setBarBtn(true);
+  //     }
+  //   }
+  // };
 
   const handleNav = () => {
     if (barBtn) {
@@ -58,25 +59,25 @@ const NavbarContent = ({ navbar }) => {
     }
   };
 
-  const updateSearchParams = (key, value) => {
-    const params = new URLSearchParams(searchParams.toString());
-    if (
-      value === "AlleKategorien" ||
-      value === "alleStädte" ||
-      value === "bittewählen" ||
-      !value
-    ) {
-      params.delete(key);
-    } else {
-      params.set(key, value);
-    }
-    router.push(`/hotels?search=${value}#anchor-ranking`);
-  };
+  // const updateSearchParams = (key, value) => {
+  //   const params = new URLSearchParams(searchParams.toString());
+  //   if (
+  //     value === "AlleKategorien" ||
+  //     value === "alleStädte" ||
+  //     value === "bittewählen" ||
+  //     !value
+  //   ) {
+  //     params.delete(key);
+  //   } else {
+  //     params.set(key, value);
+  //   }
+  //   router.push(`/hotels?search=${value}#anchor-ranking`);
+  // };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    updateSearchParams("search", displayText);
-  };
+  // const handleSubmit = (e) => {
+  //   e.preventDefault();
+  //   updateSearchParams("search", displayText);
+  // };
 
   return (
     <>
@@ -89,6 +90,7 @@ const NavbarContent = ({ navbar }) => {
           <Carousel
             opts={{
               align: "start",
+              startIndex: initialSlide,
               loop: true,
             }}
             className="w-full"
@@ -115,9 +117,11 @@ const NavbarContent = ({ navbar }) => {
                           editionIndex === idx ? "block" : "hidden"
                         }`}
                       ></div>
-                      <h2 className="font-light font-gte text-[18px]">
-                        {data.title}
-                      </h2>
+                      <Link href={data.link}>
+                        <h2 className="font-light font-gte text-[18px]">
+                          {data.title}
+                        </h2>
+                      </Link>
                     </div>
                   </CarouselItem>
                 );
@@ -136,7 +140,8 @@ const NavbarContent = ({ navbar }) => {
           <div className="w-full h-full max-w-[616px] flex justify-between items-start pt-4">
             {Edition.map((data, idx) => {
               return (
-                <div
+                <Link
+                  href={data.link}
                   onMouseOver={() => setShowEdition(true)}
                   onMouseOut={() => setShowEdition(false)}
                   onClick={() => setEditionIndex(idx)}
@@ -164,7 +169,7 @@ const NavbarContent = ({ navbar }) => {
                   >
                     <img src={data.img} alt="" />
                   </div>
-                </div>
+                </Link>
               );
             })}
           </div>
@@ -180,13 +185,13 @@ const NavbarContent = ({ navbar }) => {
             className="flex justify-between items-center w-full px-4 mb-5"
           >
             <div>
-              <button onClick={handleSearch}>
+              {/* <button onClick={handleSearch}>
                 <FiSearch
                   className={`text-[20px] ${
-                    search ? "text-[#B64F32]" : "text-black"
+                    search ? "text-[#866A41]" : "text-black"
                   }`}
                 />
-              </button>
+              </button> */}
             </div>
 
             <Link onClick={() => setBarBtn(true)} href="/">
@@ -231,7 +236,7 @@ const NavbarContent = ({ navbar }) => {
             </button>
           </div>
           <div className="w-full flex justify-center items-center">
-            <form
+            {/* <form
               className={`w-full  justify-center items-center ${
                 search ? "flex " : "hidden"
               }`}
@@ -247,7 +252,7 @@ const NavbarContent = ({ navbar }) => {
               <button className="w-[15%] h-[43px] p-5 bg-black text-white flex justify-center items-center">
                 <FiSearch className="text-[30px]" />
               </button>
-            </form>
+            </form> */}
           </div>
           <div
             className={`flex flex-col absolute right-0 py-3 top-[80px] justify-start items-center z-10 duration-100 bg-white overflow-y-auto max-h-[calc(100vh-80px)] ${
@@ -267,7 +272,7 @@ const NavbarContent = ({ navbar }) => {
                         onClick={() => {
                           setMenu(!menu);
                         }}
-                        className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]"
+                        className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#866A41] hover:border-[#866A41]"
                       >
                         <div onClick={scrollToTop}>{label}</div>
                       </li>
@@ -277,7 +282,7 @@ const NavbarContent = ({ navbar }) => {
                         onClick={() => setBarBtn(true)}
                         href={`${url}`}
                       >
-                        <li className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#B64F32] hover:border-[#B64F32]">
+                        <li className="font-gte mt-3 w-full px-3 text-[18px] uppercase font-[350] leading-[24px] border-b border-black pb-2 hover:text-[#866A41] hover:border-[#866A41]">
                           {label}
                         </li>
                       </Link>
@@ -319,7 +324,7 @@ const NavbarContent = ({ navbar }) => {
                                   href={`${navitem?.url}`}
                                   onClick={() => setBarBtn(true)}
                                   key={index}
-                                  className="text-[14px] font-gte font-light hover:text-[#B65033]"
+                                  className="text-[14px] font-gte font-light hover:text-[#866A41]"
                                 >
                                   {navitem?.label}
                                 </Link>
@@ -357,9 +362,9 @@ const NavbarContent = ({ navbar }) => {
                     <h1
                       onMouseOver={() => setMenu(true)}
                       onMouseOut={() => setMenu(false)}
-                      className={`text-[16px] font-bold font-montserrat uppercase leading-[24px] hover:text-[#B64F32] cursor-pointer h-full flex justify-center items-center px-4 ${
+                      className={`text-[16px] font-bold font-montserrat uppercase leading-[24px] hover:text-[#866A41] cursor-pointer h-full flex justify-center items-center px-4 ${
                         menu === true
-                          ? "text-[#B64F32] bg-[#F9F8FA]"
+                          ? "text-[#866A41] bg-[#F9F8FA]"
                           : "text-black bg-transparent"
                       }`}
                     >
@@ -367,7 +372,7 @@ const NavbarContent = ({ navbar }) => {
                     </h1>
                   ) : (
                     <Link href={`${url}`}>
-                      <button className="text-[16px] h-full flex justify-center items-center font-bold font-montserrat uppercase leading-[24px] hover:text-[#B64F32] px-4 cursor-pointer">
+                      <button className="text-[16px] h-full flex justify-center items-center font-bold font-montserrat uppercase leading-[24px] hover:text-[#866A41] px-4 cursor-pointer">
                         {label}
                       </button>
                     </Link>
@@ -377,7 +382,7 @@ const NavbarContent = ({ navbar }) => {
             })}
           </div>
           <div className="flex items-center justify-end gap-4 w-1/6">
-            <div
+            {/* <div
               className={`flex h-10 items-center border-black  ${
                 displaySearch ? "border-none" : "border-2"
               }`}
@@ -388,7 +393,7 @@ const NavbarContent = ({ navbar }) => {
                 }}
                 className={`flex h-full px-3 justify-center items-center  ${
                   displaySearch
-                    ? "hover:text-[#B64F32] cursor-pointer"
+                    ? "hover:text-[#866A41] cursor-pointer"
                     : "hover:none cursor-auto"
                 } `}
               >
@@ -415,13 +420,13 @@ const NavbarContent = ({ navbar }) => {
                   className={`absolute right-2 top-0 h-full  ${
                     displaySearch
                       ? "hover:none cursor-auto"
-                      : "hover:text-[#B64F32] cursor-pointer"
+                      : "hover:text-[#866A41] cursor-pointer"
                   } `}
                 >
                   <IoClose className="text-[20px] font-bold" />
                 </button>
               </div>
-            </div>
+            </div> */}
             {/* <div className="gap-4 flex">
               <button className="font-montserrat font-bold text-[12px] uppercase py-2 px-3 max-h-7 leading-3 bg-black text-white cursor-pointer">
                 Login
@@ -471,7 +476,7 @@ const NavbarContent = ({ navbar }) => {
                             <Link
                               href={`${navitem?.url}#${navitem?.id}`}
                               key={index}
-                              className="text-[14px] font-gte font-light hover:text-[#B65033]"
+                              className="text-[14px] font-gte font-light hover:text-[#866A41]"
                             >
                               {navitem?.label}
                             </Link>

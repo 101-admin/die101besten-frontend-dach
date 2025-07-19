@@ -11,6 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import Link from "next/link";
 
 const SecondaryDropdownContent = () => {
   const router = useRouter();
@@ -51,7 +52,10 @@ const SecondaryDropdownContent = () => {
           </h4>
         </div> */}
         <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px]">
-          Special Editions <span className="text-[#B65033]">Deutschland</span>
+          Special Editions{" "}
+          <span className="bg-gradient-to-r from-[#866A41] to-[#866A41] bg-clip-text text-transparent">
+            DACH-Region & Südtirol
+          </span>
         </h1>
         <p className="font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] font-gte mb-8">
           Alphabetische Sortierung
@@ -61,14 +65,28 @@ const SecondaryDropdownContent = () => {
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               Edition
             </h3>
-            <Select value={value} onValueChange={setValue}>
+            <Select
+              defaultValue=""
+              onValueChange={(url) => {
+                if (url) {
+                  window.location.href = url;
+                }
+              }}
+            >
               <SelectTrigger>
-                <SelectValue placeholder=" " />
+                <SelectValue placeholder="DACH + Südtirol" />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="deutschland">Deutschland</SelectItem>
-                  <SelectItem value="sanana">Schweiz</SelectItem>
+                  <SelectItem value="https://die-new.vercel.app/special-editions">
+                    Deutschland
+                  </SelectItem>
+                  <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/special-editions">
+                    DACH + Südtirol
+                  </SelectItem>
+                  <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/special-editions">
+                    Schweiz
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
