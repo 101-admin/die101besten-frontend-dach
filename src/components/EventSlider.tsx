@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import { ColoredText } from "./ui/ColoredText";
 import {
@@ -7,9 +8,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-
-import type { allEvent } from "@/lib";
-import Link from "next/link";
+import { useParams } from "next/navigation";
+import type { allEvent, SanityImage } from "@/lib";
+import NextLink from "./NextLink";
+import { stripLocaleFromSlug } from "@/lib/utils";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 const formatDate = (dateString: string | undefined): string => {
   if (!dateString) return "Invalid date";
@@ -26,7 +29,9 @@ const formatDate = (dateString: string | undefined): string => {
 
 const EventSlider = ({ events }: { events: allEvent }) => {
   console.log(events, "events");
-  return (
+  const params = useParams();
+  const locale = params.locale;
+    return (
     <section className="w-full max-w-[1440px] mx-auto flex flex-col justify-center items-center pt-5 py-10 lg:py-20 px-5 lg:px-16 gap-16">
       <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-16">
         {events?.title && (
@@ -51,28 +56,39 @@ const EventSlider = ({ events }: { events: allEvent }) => {
                     description,
                     startDate,
                     slug,
-                    location
+                    location,
                   } = event;
                   return (
                     <CarouselItem
                       key={index}
                       className="sm:basis-1/2 lg:basis-1/3"
                     >
-                      <Link href={`/events/${slug}`} className="w-full">
+                      <NextLink
+                        href={`/events/${stripLocaleFromSlug(slug as string)}`}
+                        className="w-full"
+                      >
                         <div className="w-full flex flex-col justify-start items-baseline gap-8">
                           <div className="w-full h-[394px] flex relative">
                             {mainImage && (
-                              <img
+                              // <img
+                              //   className="w-full h-full object-cover object-top"
+                              //   src={`${mainImage?.url}`}
+                              //   alt={`${mainImage?.alt}`}
+                              // />
+                              <OptimizedImage
+                                image={mainImage as SanityImage}
                                 className="w-full h-full object-cover object-top"
-                                src={`${mainImage?.url}`}
-                                alt={`${mainImage?.alt}`}
+                                priority
                               />
                             )}
-                            {startDate && startDate > new Date().toISOString() && (
-                              <div className="absolute top-8 left-3 md:left-8 lg:left-5 xl:left-8 bg-[#FFFFFF8C] backdrop-blur-[30px] p-6 max-w-[244px] xl:max-w-[270px] max-h-[88px] w-full h-full flex justify-center items-center">
-                                <h1 className="font-ogg font-normal text-[22px] sm:text-[25px] md:text-[28px] xl:text-[32px]">Coming soon</h1>
-                              </div>
-                            )}
+                            {startDate &&
+                              startDate > new Date().toISOString() && (
+                                <div className="absolute top-8 left-3 md:left-8 lg:left-5 xl:left-8 bg-[#FFFFFF8C] backdrop-blur-[30px] p-6 max-w-[244px] xl:max-w-[270px] max-h-[88px] w-full h-full flex justify-center items-center">
+                                  <h1 className="font-ogg font-normal text-[22px] sm:text-[25px] md:text-[28px xl:text-[32px]">
+                                    Coming soon
+                                  </h1>
+                                </div>
+                              )}
                           </div>
                           <div className="w-full flex flex-col justify-start items-baseline gap-6">
                             {startDate && (
@@ -98,11 +114,11 @@ const EventSlider = ({ events }: { events: allEvent }) => {
                               </p>
                             )}
                             <button className="btn-secondary w-[300px] text-black border-black btn-secondary-hover-de">
-                              weiterlesen
+                              {locale === "de" ? "weiterlesen" : "Read More"}
                             </button>
                           </div>
                         </div>
-                      </Link>
+                      </NextLink>
                     </CarouselItem>
                   );
                 })}
@@ -119,11 +135,11 @@ const EventSlider = ({ events }: { events: allEvent }) => {
       </div>
       <div className="w-full flex flex-col justify-center items-center">
         {events?.ctaButton && (
-          <Link href={`${events?.ctaButton?.link}`}>
+          <NextLink href={`${events?.ctaButton?.link}`}>
             <button className="btn-primary btn-primary-hover-de w-[300px]">
               {events?.ctaButton?.text}
             </button>
-          </Link>
+          </NextLink>
         )}
       </div>
     </section>

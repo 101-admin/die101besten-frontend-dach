@@ -4,9 +4,14 @@ import { Event } from "@/lib/types/events.types";
 import { PortableText } from "@/lib/components/PortableText";
 import { HiPhoto } from "react-icons/hi2";
 import { IoCloseOutline } from "react-icons/io5";
+import { OptimizedImage } from "../ui/OptimizedImage";
+import { SanityImage } from "@/lib";
+import { useParams } from "next/navigation";
 
 const EventsDetails = ({ events }: { events: Event }) => {
   const [showPopUp, setShowPopUp] = useState<boolean>(false);
+  const params = useParams();
+  const locale = params.locale;
   console.log(events.gallery, "gallery");
   const formatDate = (dateString: string | undefined): string => {
     if (!dateString) return "Invalid date";
@@ -25,37 +30,38 @@ const EventsDetails = ({ events }: { events: Event }) => {
       <div className="w-full flex flex-col justify-center items-center lg:flex-row-reverse lg:items-start gap-6 lg:gap-16">
         {events?.mainImage && (
           <div className="w-full lg:max-w-[600px] h-[400px] flex relative">
-            <img
+            {/* <img
               className="w-full h-full object-cover object-top"
               src={events?.mainImage?.url}
               alt={events?.mainImage?.alt}
+            /> */}
+            <OptimizedImage
+              image={events?.mainImage as SanityImage}
+              className="w-full h-full object-cover object-top"
+              priority
             />
-{
-  events?.gallery && events?.gallery?.length !== 0 && (
-    <button
-    onClick={() => setShowPopUp(true)}
-    className="w-[240px] flex items-center justify-center gap-2 text-white uppercase font-montserrat font-bold text-xs sm:text-sm bg-black hover:bg-opacity-90 transition px-4 py-4 absolute top-3 right-3 sm:top-5 sm:right-5"
-  >
-    <HiPhoto className="w-[22px] h-[18px]" />
-    <span>{"ALLE FOTOS ANZEIGEN"}</span>
-  </button>
-  )
-}
+            {events?.gallery && events?.gallery?.length !== 0 && (
+              <button
+                onClick={() => setShowPopUp(true)}
+                className="w-[240px] flex items-center justify-center gap-2 text-white uppercase font-montserrat font-bold text-xs sm:text-sm bg-black hover:bg-opacity-90 transition px-4 py-4 absolute top-3 right-3 sm:top-5 sm:right-5"
+              >
+                <HiPhoto className="w-[22px] h-[18px]" />
+                <span>{"ALLE FOTOS ANZEIGEN"}</span>
+              </button>
+            )}
           </div>
         )}
         <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-12">
           <div className="w-full flex flex-col justify-start items-baseline gap-4">
             <div className="w-full flex flex-wrap gap-3">
-              {
-                events?.eventType?.map((type , index) => (
-                  <div
-                    key={index}
-                    className="uppercase font-bold text-[12px] leading-[12px] font-montserrat p-1 border-[1px] border-black rounded-md"
-                  >
-                    {type?.title}
-                  </div>
-                ))
-              }
+              {events?.eventType?.map((type, index) => (
+                <div
+                  key={index}
+                  className="uppercase font-bold text-[12px] leading-[12px] font-montserrat p-1 border-[1px] border-black rounded-md"
+                >
+                  {type?.title}
+                </div>
+              ))}
             </div>
             {events?.title && (
               <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px]">
@@ -66,7 +72,7 @@ const EventsDetails = ({ events }: { events: Event }) => {
               {events?.startDate && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Datum
+                    {locale === "de" ? "Datum" : "Date"}
                   </p>
                   <p className="font-gte font-[350] text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {formatDate(events?.startDate)}
@@ -76,7 +82,7 @@ const EventsDetails = ({ events }: { events: Event }) => {
               {events?.location && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Location
+                    {locale === "de" ? "Standort" : "Location"}
                   </p>
                   <p className="font-gte font-[350] text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {events?.location}
@@ -117,16 +123,22 @@ const EventsDetails = ({ events }: { events: Event }) => {
         </div>
         <div className="w-full " style={{ columnCount: 3, columnGap: "8px" }}>
           {events?.gallery?.map((image, i) => (
-            <img
+            // <img
+            //   key={i}
+            //   src={image?.image?.url}
+            //   alt={image?.image?.alt}
+            //   style={{
+            //     width: "100%",
+            //     display: "block",
+            //     marginBottom: "8px",
+            //     breakInside: "avoid", // Prevents image break between columns
+            //   }}
+            // />
+            <OptimizedImage
               key={i}
-              src={image?.image?.url}
-              alt={image?.image?.alt}
-              style={{
-                width: "100%",
-                display: "block",
-                marginBottom: "8px",
-                breakInside: "avoid", // Prevents image break between columns
-              }}
+              image={image?.image as SanityImage}
+              className="w-full mb-2 break-inside-avoid block"
+              priority
             />
           ))}
         </div>

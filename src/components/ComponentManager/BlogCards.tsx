@@ -1,13 +1,17 @@
 "use client";
 import React, { useState } from "react";
-import Image from "next/image";
-import type { BlogPage } from "@/lib";
-import Link from "next/link";
+import type { BlogPage, SanityImage } from "@/lib";
+import NextLink from "../NextLink"
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
+import { stripLocaleFromSlug } from "@/lib/utils";
+import { useParams } from "next/navigation";
 
 const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
   // console.log(blogData, "@blogData");
 
+  const params = useParams();
+  const locale = params.locale;
   const [numOfBlogs, setNumOfBlogs] = useState<number>(5);
 
   return (
@@ -18,14 +22,21 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
             const { category, readMore, mainImage, title, description, slug } =
               post;
             return (
-              <Link key={index} href={`/blogs/${slug}`}>
+              <NextLink
+                key={index}
+                href={`/blogs/${stripLocaleFromSlug(slug as string)}`}
+              >
                 <div className="flex flex-col relative pb-24 cursor-pointer">
                   {/* Image  */}
                   <div className="relative w-full mb-4 sm:mb-6  overflow-hidden">
                     {mainImage && (
-                      <img
-                        src={`${mainImage?.url}`}
-                        alt={`${mainImage?.alt}`}
+                      // <img
+                      //   src={`${mainImage?.url}`}
+                      //   alt={`${mainImage?.alt}`}
+                      //   className="object-cover w-full  max-w-[632px] h-[552px]"
+                      // />
+                      <OptimizedImage
+                        image={mainImage as SanityImage}
                         className="object-cover w-full  max-w-[632px] h-[552px]"
                       />
                     )}
@@ -66,7 +77,7 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
                     </div>
                   </div>
                 </div>
-              </Link>
+              </NextLink>
             );
           })}
         </div>
@@ -78,7 +89,7 @@ const BlogCards = ({ blogData }: { blogData: BlogPage[] }) => {
                 numOfBlogs < blogData?.length ? "flex" : "hidden"
               }`}
             >
-              mehr anzeigen
+              {locale === "de" ? "mehr anzeigen" : "show more"}
             </button>
           )}
         </div>

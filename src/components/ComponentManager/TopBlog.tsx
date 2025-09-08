@@ -1,8 +1,10 @@
 import React from "react";
-import Image from "next/image";
-import type { BlogPage } from "@/lib";
-import Link from "next/link";
+// import Image from "next/image";
+import type { BlogPage, SanityImage } from "@/lib";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
+import { stripLocaleFromSlug } from "@/lib/utils";
 
 const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
   const blog = blogData?.[0];
@@ -11,19 +13,30 @@ const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
   return (
     <section className="w-full">
       {blog && (
-        <Link href={`/blogs/${blog.slug}`} className="w-full">
+        <NextLink
+          href={`/blogs/${stripLocaleFromSlug(blog.slug as string)}`}
+          className="w-full"
+        >
           <div className="w-full pb-12 pt-12 lg:pt-20  px-5 sm:px-6 md:px-16">
             <div className="max-w-[1312px] w-full mx-auto">
               <div className="w-full flex flex-col lg:flex-row gap-8 md:gap-12 lg:gap-16 items-center lg:items-start justify-between">
                 {/* Image */}
                 {blog?.mainImage && (
                   <div className="w-full lg:w-1/2  overflow-hidden">
-                    <Image
+                    {/* <Image
                       src={blog.mainImage.url || ""}
                       alt={blog.mainImage.alt || "blog image"}
                       width={632}
                       height={552}
                       className="w-full h-[552px] object-cover"
+                      priority
+                    /> */}
+
+                    <OptimizedImage
+                      image={blog.mainImage as SanityImage}
+                      className="w-full h-[552px] object-cover"
+                      width={632}
+                      height={552}
                       priority
                     />
                   </div>
@@ -62,7 +75,7 @@ const TopBlog = ({ blogData }: { blogData: BlogPage[] }) => {
               </div>
             </div>
           </div>
-        </Link>
+        </NextLink>
       )}
     </section>
   );
