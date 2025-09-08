@@ -1,8 +1,9 @@
 import React from "react";
-import { type DasBuch } from "@/lib";
-import Link from "next/link";
+import { SanityImage, type DasBuch } from "@/lib";
+import NextLink from "../NextLink";
 import { PortableText } from "@/lib/components/PortableText";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 
 const HotelInfo = ({
   title,
@@ -28,10 +29,14 @@ const HotelInfo = ({
         >
           <div className="w-[70%] flex justify-center">
             {image && (
-              <img
+              // <img
+              //   className="sm:max-w-[428px] sm:max-h-[508px]"
+              //   src={`${image?.url}`}
+              //   alt={`${image?.alt}`}
+              // />
+              <OptimizedImage
+                image={image as SanityImage}
                 className="sm:max-w-[428px] sm:max-h-[508px]"
-                src={`${image?.url}`}
-                alt={`${image?.alt}`}
               />
             )}
           </div>
@@ -47,11 +52,11 @@ const HotelInfo = ({
               </h4>
             )}
             {ctaButton && (
-              <Link target="_blank" href={`${ctaButton?.link}`}>
+              <NextLink target="_blank" href={`${ctaButton?.link}`}>
                 <button className="btn-primary btn-primary-hover-de ">
                   {ctaButton?.text}
                 </button>
-              </Link>
+              </NextLink>
             )}
           </div>
         </div>

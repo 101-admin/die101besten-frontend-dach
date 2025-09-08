@@ -7,9 +7,9 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import type { Hotels } from "@/lib";
-import Image from "next/image";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 // import { urlFor } from "@/sanity/lib/image";
 
 // import { HOTELS_QUERYResult } from "@/sanity/types";
@@ -54,18 +54,22 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
                       even ? "lg:items-end" : "lg:items-start"
                     }`}
                   >
-                    <Link
+                    <NextLink
                       href={`${hotel?.link}`}
                       className="flex flex-col gap-3"
                     >
                       <div className="flex">
                         {hotel?.image && (
-                          <Image
+                          // <Image
+                          //   className="w-[304px] h-[480px] object-cover"
+                          //   src={`${hotel.image?.url}`}
+                          //   width={304}
+                          //   height={480}
+                          //   alt={`${hotel.image?.alt}`}
+                          // />
+                          <OptimizedImage
+                            image={hotel.image}
                             className="w-[304px] h-[480px] object-cover"
-                            src={`${hotel.image?.url}`}
-                            width={304}
-                            height={480}
-                            alt={`${hotel.image?.alt}`}
                           />
                         )}
                       </div>
@@ -74,7 +78,7 @@ export function HotelsSlider({ title, description, hotels }: Hotels) {
                           {hotel.name}
                         </p>
                       )}
-                    </Link>
+                    </NextLink>
                   </CarouselItem>
                 );
               })}

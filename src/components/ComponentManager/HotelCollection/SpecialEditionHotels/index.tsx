@@ -87,8 +87,8 @@ const SpecialEditionHotelsContent = ({
                 <h2
                   className={`font-montserrat font-semibold  leading-[24px] group-hover:text-[#866A41] duration-200 ${
                     index == idx
-                      ? "text-[#866A41] text-[20px] sm:text-[22px]"
-                      : "text-[18px]"
+                      ? "text-[#866A41] sm:text-[22px]"
+                      : "text-black sm:text-[18px]"
                   }`}
                 >
                   {button.title}

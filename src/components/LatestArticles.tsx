@@ -6,10 +6,11 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import Image from "next/image";
-import type { ArticleSection } from "@/lib";
+import type { ArticleSection, SanityImage } from "@/lib";
 import { ColoredText } from "./ui/ColoredText";
-import Link from "next/link";
+import NextLink from "./NextLink";
+import { stripLocaleFromSlug } from "@/lib/utils";
+import { OptimizedImage } from "./ui/OptimizedImage";
 
 const LatestArticles = ({ data }: { data?: ArticleSection }) => {
   console.log(data, "latest articles");
@@ -48,11 +49,15 @@ const LatestArticles = ({ data }: { data?: ArticleSection }) => {
                       <div className="w-full flex flex-col">
                         <div className="relative w-full h-64">
                           {mainImage && (
-                            <Image
-                              src={mainImage?.url || ""}
-                              alt={mainImage?.alt || ""}
-                              fill
-                              className="object-cover"
+                            // <Image
+                            //   src={mainImage?.url || ""}
+                            //   alt={mainImage?.alt || ""}
+                            //   fill
+                            //   className="object-cover"
+                            // />
+                            <OptimizedImage
+                              image={mainImage as SanityImage}
+                              className="object-cover w-full h-full"
                             />
                           )}
                         </div>
@@ -73,11 +78,15 @@ const LatestArticles = ({ data }: { data?: ArticleSection }) => {
                             </p>
                           )}
                           {readMore && (
-                            <Link href={`/blogs/${slug}`}>
+                            <NextLink
+                              href={`/blogs/${stripLocaleFromSlug(
+                                slug as string
+                              )}`}
+                            >
                               <button className="mt-4 w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
                                 {readMore}
                               </button>
-                            </Link>
+                            </NextLink>
                           )}
                         </div>
                       </div>
@@ -99,11 +108,11 @@ const LatestArticles = ({ data }: { data?: ArticleSection }) => {
         {/* Button */}
         <div className="mt-6 w-full flex flex-col justify-start items-baseline md:justify-center md:items-center">
           {data?.button && (
-            <Link href={`${data?.button?.link}`}>
+            <NextLink href={`${data?.button?.link}`}>
               <button className="btn-primary w-[300px] btn-primary-hover-de">
                 {data?.button?.text}
               </button>
-            </Link>
+            </NextLink>
           )}
         </div>
       </div>

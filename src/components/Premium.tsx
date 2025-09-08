@@ -1,6 +1,11 @@
-import { HotelAchievement, HotelDetailsSection , CTAButton } from "@/lib";
-import Image from "next/image";
-import Link from "next/link";
+import {
+  HotelAchievement,
+  HotelDetailsSection,
+  CTAButton,
+  SanityImage,
+} from "@/lib";
+import NextLink from "./NextLink";
+import { OptimizedImage } from "./ui/OptimizedImage";
 // import { CiHeart } from "react-icons/ci";
 // import { LuArrowUpFromLine } from "react-icons/lu";
 
@@ -28,10 +33,17 @@ export default function Premium({
           {/* Image Section */}
           <div className="relative">
             {image && (
-              <img
+              // <img
+              //   className="w-full max-w-[500px] lg:w-[500px] h-[600px] object-cover"
+              //   src={image?.url || ""}
+              //   alt={image?.alt || ""}
+              // />
+              <OptimizedImage
+                image={image as SanityImage}
                 className="w-full max-w-[500px] lg:w-[500px] h-[600px] object-cover"
-                src={image?.url || ""}
-                alt={image?.alt || ""}
+                width={500}
+                height={600}
+                priority
               />
             )}
           </div>
@@ -71,15 +83,15 @@ export default function Premium({
             <div className="flex flex-col gap-4 mt-auto">
               {ctaButton && (
                 <div className="w-full flex justify-start items-center h-20">
-                  <Link
-                  target="_blank"
-                  className="max-w-[300px] w-full"
-                  href={`${ctaButton?.url}`}
-                >
-                  <button className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
-                    {ctaButton?.text}
-                  </button>
-                </Link>
+                  <NextLink
+                    target="_blank"
+                    className="max-w-[300px] w-full"
+                    href={`${ctaButton?.url}`}
+                  >
+                    <button className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de">
+                      {ctaButton?.text}
+                    </button>
+                  </NextLink>
                 </div>
               )}
 
@@ -96,8 +108,8 @@ export default function Premium({
             </div>
           </div>
         </div>
-          {brandImages && (
-        <div className="w-full flex flex-col justify-center item-center pt-16 sm:pt-24 md:pt-36">
+        {brandImages && (
+          <div className="w-full flex flex-col justify-center item-center pt-16 sm:pt-24 md:pt-36">
             <div className="flex flex-wrap items-center justify-center lg:gap-16 gap-8 ">
               {brandImages?.map((brandImage, index) => (
                 <div
@@ -105,18 +117,25 @@ export default function Premium({
                   className="relative w-[180px] lg:w-[243.83px] h-[60px] lg:h-[80px]"
                 >
                   {brandImage?.image && (
-                    <Image
-                      src={brandImage?.image?.url || ""}
-                      alt={brandImage?.image?.alt || ""}
-                      fill
+                    // <Image
+                    //   src={brandImage?.image?.url || ""}
+                    //   alt={brandImage?.image?.alt || ""}
+                    //   fill
+                    //   className="object-contain"
+                    // />
+                    <OptimizedImage
+                      image={brandImage?.image as SanityImage}
                       className="object-contain"
+                      width={180}
+                      height={60}
+                      fill
                     />
                   )}
                 </div>
               ))}
             </div>
-        </div>
-          )}
+          </div>
+        )}
       </div>
     </div>
   );

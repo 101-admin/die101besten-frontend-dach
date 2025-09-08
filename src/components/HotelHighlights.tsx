@@ -1,10 +1,11 @@
-"use client"
+"use client";
 import Image from "next/image";
 import { IoCloseOutline } from "react-icons/io5";
-import type { HotelHighlights } from "@/lib";
+import type { HotelHighlights, SanityImage } from "@/lib";
 
 import { ColoredText } from "./ui/ColoredText";
 import { useState } from "react";
+import { OptimizedImage } from "./ui/OptimizedImage";
 export default function HotelHighlights({
   hotelHighlights,
 }: {
@@ -12,21 +13,27 @@ export default function HotelHighlights({
 }) {
   const [showPopUp, setShowPopUp] = useState(false);
   return (
-    <section
-      className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative py-7 sm:py-10 md:py-12 lg:py-16"
-    >
+    <>
+    <section className="w-full max-w-[1440px] mx-auto px-4 sm:px-8 lg:px-16 relative py-7 sm:py-10 md:py-12 lg:py-16">
       <div className="flex flex-col lg:flex-row h-full gap-12">
         {/* Left Image */}
         <div className="w-full  h-full relative">
           <div className="relative w-full h-full overflow-hidden">
             {hotelHighlights?.image && (
-              <Image
+              // <Image
+              //   className="max-w-[630px] w-full h-[600px] object-cover"
+              //   src={hotelHighlights?.image?.url || ""}
+              //   alt={hotelHighlights?.image?.alt || ""}
+              //   width={629}
+              //   height={600}
+              //   objectFit="cover"
+              //   priority
+              // />
+              <OptimizedImage
+                image={hotelHighlights?.image as SanityImage}
                 className="max-w-[630px] w-full h-[600px] object-cover"
-                src={hotelHighlights?.image?.url || ""}
-                alt={hotelHighlights?.image?.alt || ""}
                 width={629}
                 height={600}
-                objectFit="cover"
                 priority
               />
             )}
@@ -42,23 +49,29 @@ export default function HotelHighlights({
             </h1>
           )}
           <ul className="space-y-6 mb-12">
-            {hotelHighlights?.amenities?.slice(0, 4).map((amenity, index) => {
+            {hotelHighlights?.highlights?.slice(0, 4).map((highlight, index) => {
               return (
                 <li key={index} className="flex items-center gap-4">
                   <div className="w-16 h-16 flex-shrink-0 relative">
-                    {amenity?.icon && (
-                      <Image
-                        src={amenity?.icon?.url || ""}
-                        alt={amenity?.icon?.alt || ""}
+                    {highlight?.icon && (
+                      // <Image
+                      //   src={amenity?.icon?.url || ""}
+                      //   alt={amenity?.icon?.alt || ""}
+                      //   width={64}
+                      //   height={64}
+                      //   className="object-contain"
+                      // />
+                      <OptimizedImage
+                        image={highlight?.icon as SanityImage}
+                        className="object-contain"
                         width={64}
                         height={64}
-                        className="object-contain"
                       />
                     )}
                   </div>
-                  {amenity?.amenityText && (
+                  {highlight?.description && (
                     <span className="font-gte font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] leading-[32px]">
-                      {amenity?.amenityText}
+                      {highlight?.description}
                     </span>
                   )}
                 </li>
@@ -66,7 +79,7 @@ export default function HotelHighlights({
             })}
           </ul>
 
-          {hotelHighlights?.ctaButton && (
+          {hotelHighlights?.ctaButton && (hotelHighlights?.highlights || []).length > 4 && (
             <button
               onClick={() => setShowPopUp(true)}
               className="w-[300px] btn-secondary border-black text-black btn-secondary-hover-de"
@@ -100,23 +113,29 @@ export default function HotelHighlights({
         </div>
         <div className="w-full flex flex-col justify-start items-baseline lg:flex-row lg:justify-center lg:items-start lg:gap-16 ">
           <ul className="w-full space-y-6 mb-7 grid grid-cols-1 lg:grid-cols-2">
-            {hotelHighlights?.amenities?.map((amenity, index) => {
+            {hotelHighlights?.highlights?.map((highlight, index) => {
               return (
                 <li key={index} className="w-full flex items-center gap-4">
                   <div className="w-16 h-16 flex-shrink-0 relative">
-                    {amenity?.icon && (
-                      <Image
-                        src={`${amenity?.icon?.url}`}
-                        alt={`${amenity?.icon?.alt}`}
+                    {highlight?.icon && (
+                      // <Image
+                      //   src={`${amenity?.icon?.url}`}
+                      //   alt={`${amenity?.icon?.alt}`}
+                      //   width={64}
+                      //   height={64}
+                      //   className="object-contain"
+                      // />
+                      <OptimizedImage
+                        image={highlight?.icon as SanityImage}
+                        className="object-contain"
                         width={64}
                         height={64}
-                        className="object-contain"
                       />
                     )}
                   </div>
-                  {amenity?.amenityText && (
+                  {highlight?.description && (
                     <span className="font-gte font-[350] text-[15px] sm:text-[18px] md:text-[21px] lg:text-[24px] leading-[32px]">
-                      {amenity?.amenityText}
+                      {highlight?.description}
                     </span>
                   )}
                 </li>
@@ -126,5 +145,6 @@ export default function HotelHighlights({
         </div>
       </div>
     </section>
+    </>
   );
 }

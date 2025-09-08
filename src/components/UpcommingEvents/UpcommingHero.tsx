@@ -1,7 +1,12 @@
+"use client";
 import React from "react";
-import type { Event } from "@/lib";
+import type { Event, SanityImage } from "@/lib";
+import { OptimizedImage } from "../ui/OptimizedImage";
+import { useParams } from "next/navigation";
 
 const UpcommingHero = ({ event }: { event: Event }) => {
+  const params = useParams();
+  const locale = params.locale;
   const formatDate = (dateString: string | undefined): string => {
     if (!dateString) return "Invalid date";
 
@@ -20,26 +25,31 @@ const UpcommingHero = ({ event }: { event: Event }) => {
       <div className="w-full flex flex-col justify-center items-center lg:flex-row-reverse gap-6 lg:gap-16">
         {event?.mainImage && (
           <div className="w-full lg:max-w-[632px] h-[552px] flex">
-            <img
+            {/* <img
               className="w-full h-full object-cover"
               src={event?.mainImage?.url}
               alt={event?.mainImage?.alt}
+            /> */}
+            <OptimizedImage
+              image={event?.mainImage as SanityImage}
+              className="w-full h-full object-cover"
+              // width={632}
+              // height={552}
+              priority
             />
           </div>
         )}
         <div className="w-full flex flex-col justify-start items-baseline gap-6 lg:gap-12">
           <div className="w-full flex flex-col justify-start items-baseline gap-4">
             <div className="w-full flex flex-wrap gap-3">
-              {
-                event?.eventType?.map((type , index) => (
-                  <div
-                    key={index}
-                    className="uppercase font-bold text-[12px] leading-[12px] font-montserrat p-1 border-[1px] border-black rounded-md"
-                  >
-                    {type.title}
-                  </div>
-                ))
-              }
+              {event?.eventType?.map((type, index) => (
+                <div
+                  key={index}
+                  className="uppercase font-bold text-[12px] leading-[12px] font-montserrat p-1 border-[1px] border-black rounded-md"
+                >
+                  {type.title}
+                </div>
+              ))}
             </div>
             {event?.title && (
               <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px]">
@@ -50,7 +60,7 @@ const UpcommingHero = ({ event }: { event: Event }) => {
               {event?.startDate && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Datum
+                    {locale === "de" ? "Datum" : "Date"}
                   </p>
                   <p className="font-gte font-bold text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {formatDate(event?.startDate)}
@@ -60,7 +70,7 @@ const UpcommingHero = ({ event }: { event: Event }) => {
               {event?.location && (
                 <div className="flex flex-col justify-start items-baseline gap-1">
                   <p className="font-gte font-[350] text-[16px] sm:text-[20px] leading-[20px] sm:leading-[24px]">
-                    Location
+                  {locale === "de" ? "Standort" : "Location"}
                   </p>
                   <p className="font-gte font-bold text-[20px] sm:text-[24px] leading-[24px] sm:leading-[32px]">
                     {event?.location}

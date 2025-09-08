@@ -1,16 +1,21 @@
 import React from "react";
-import type { Testimonial } from "@/lib";
+import type { SanityImage, Testimonial } from "@/lib";
 import { ColoredText } from "@/components/ui/ColoredText";
+import { OptimizedImage } from "@/components/ui/OptimizedImage";
 
 const TestimonialSec = ({ author, review, image }: Testimonial) => {
   return (
     <section className="w-full lg:h-[600px] max-w-[1056px] flex flex-col justify-center items-center relative">
       <div className="w-full flex justify-center items-center static lg:absolute lg:left-[-300px] top-[50px] xl:left-[-340px]">
         {image && (
-          <img
+          // <img
+          //   className="w-[260px] h-[346px] object-cover"
+          //   src={image?.url}
+          //   alt={image?.alt}
+          // />
+          <OptimizedImage
+            image={image as SanityImage}
             className="w-[260px] h-[346px] object-cover"
-            src={image?.url}
-            alt={image?.alt}
           />
         )}
       </div>

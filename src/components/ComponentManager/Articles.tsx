@@ -1,3 +1,4 @@
+"use client";
 import React from "react";
 import {
   Carousel,
@@ -8,9 +9,12 @@ import {
 } from "@/components/ui/carousel";
 // import ArticleData from "@/Data/ArticleData";
 
-import type { Hotelmomente } from "@/lib";
-import Link from "next/link";
+import type { Hotelmomente, SanityImage } from "@/lib";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
+import { stripLocaleFromSlug } from "@/lib/utils";
+import { useParams } from "next/navigation";
 const Articles = ({
   title,
   description,
@@ -18,6 +22,8 @@ const Articles = ({
   ctaButton,
   id,
 }: Hotelmomente) => {
+  const params = useParams();
+  const locale = params.locale;
   return (
     <section
       id={id}
@@ -50,13 +56,20 @@ const Articles = ({
                     key={index}
                     className="sm:basis-1/2 xl:basis-1/3  cursor-pointer group/show flex flex-col justify-center items-center w-full"
                   >
-                    <Link className="w-full" href={`/blogs/${slug}`}>
+                    <NextLink
+                      className="w-full"
+                      href={`/blogs/${stripLocaleFromSlug(slug as string)}`}
+                    >
                       <div className="w-full h-full relative">
                         {mainImage && (
-                          <img
+                          // <img
+                          //   className="w-full h-[480px] object-cover"
+                          //   src={`${mainImage?.url}`}
+                          //   alt={`${mainImage?.alt}`}
+                          // />
+                          <OptimizedImage
+                            image={mainImage as SanityImage}
                             className="w-full h-[480px] object-cover"
-                            src={`${mainImage?.url}`}
-                            alt={`${mainImage?.alt}`}
                           />
                         )}
                         <div className="absolute top-0 left-0 w-full h-full hidden group-hover/show:flex flex-col justify-start items-baseline bg-[#000000B2]">
@@ -72,7 +85,7 @@ const Articles = ({
                               </p>
                             )}
                             <button className="max-w-[300] w-full h-[64px] font-Montserrat font-bold text-[16px] text-white bg-gradient-to-r from-[#866A41] to-[#BCA679] leading-[24px] text-center  uppercase">
-                              Weiterlesen
+                            {locale === "de" ? "WEITERLESEN" : "READ MORE"}
                             </button>
                           </div>
                         </div>
@@ -82,7 +95,7 @@ const Articles = ({
                           <ColoredText text={title} />
                         </h1>
                       )}
-                    </Link>
+                    </NextLink>
                   </CarouselItem>
                 );
               })}
@@ -97,11 +110,11 @@ const Articles = ({
         </div>
         <div className="w-full flex justify-center items-center">
           {ctaButton && (
-            <Link href={`${ctaButton?.link}`}>
+            <NextLink href={`${ctaButton?.link}`}>
               <button className="btn-secondary w-[250px] text-black border-black btn-secondary-hover-de">
                 {ctaButton?.text}
               </button>
-            </Link>
+            </NextLink>
           )}
         </div>
       </div>

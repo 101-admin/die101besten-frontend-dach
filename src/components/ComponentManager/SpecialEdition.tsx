@@ -8,17 +8,19 @@ import {
 import styles from "./SpecialEditionsNew.module.css";
 
 // import specialEdition from "@/Data/specialData";
-import type { SpecialEdition } from "@/lib";
-// import Link from "next/link";
+import type { SpecialEdition, SanityImage } from "@/lib";
 import { ColoredText } from "../ui/ColoredText";
-import Link from "next/link";
+import NextLink from "../NextLink";
+import { OptimizedImage } from "../ui/OptimizedImage";
+import { useParams } from "next/navigation";
 
 const SpecialEdition = ({
   title,
   description,
   specialEditionHotels,
 }: SpecialEdition) => {
-
+  const params = useParams();
+  const locale = params.locale;
   const handleMouseEnter = (e: React.MouseEvent<HTMLAnchorElement>) => {
     const box = e.currentTarget;
     box.style.zIndex = "2"; // Bring to front
@@ -58,7 +60,7 @@ const SpecialEdition = ({
         >
           <CarouselContent className="flex items-end">
             {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
-              <Link key={index} href={`${item?.link}`}>
+              <NextLink key={index} href={`${item?.link}`}>
                 <CarouselItem className="flex min-w-[250px] max-[600px]:max-w-[67vw] w-full max-w-[400px] md:max-w-[368px]">
                   <div className="w-full flex flex-col justify-center items-center gap-4">
                     {item.title && (
@@ -67,15 +69,19 @@ const SpecialEdition = ({
                       </h4>
                     )}
                     {item?.image && (
-                      <img
-                        src={`${item.image?.url}`}
+                      // <img
+                      //   src={`${item.image?.url}`}
+                      //   className="aspect-square md:aspect-auto object-cover"
+                      //   alt=""
+                      // />
+                      <OptimizedImage
+                        image={item?.image as SanityImage}
                         className="aspect-square md:aspect-auto object-cover"
-                        alt=""
                       />
                     )}
                   </div>
                 </CarouselItem>
-              </Link>
+              </NextLink>
             ))}
           </CarouselContent>
         </Carousel>
@@ -84,9 +90,8 @@ const SpecialEdition = ({
       {/* Desktop Section */}
       <div className="w-full hidden lg:flex justify-between items-end">
         {specialEditionHotels?.slice(0, 3)?.map((item, index) => (
-          <Link
+          <section
             key={index}
-            href={`${item?.link}`}
             className={styles.box}
             onMouseEnter={handleMouseEnter}
             onMouseLeave={handleMouseLeave}
@@ -98,20 +103,24 @@ const SpecialEdition = ({
                 {item.title}
               </h4>
             )}
-            <div className={styles.innerBox}>
-              {item?.image && <img src={`${item?.image?.url}`} alt="" />}
+            <NextLink href={`${item?.link}`}  className={styles.innerBox}>
+              {item?.image && (
+                // <img src={`${item?.image?.url}`} alt="" />
+                <OptimizedImage
+                  image={item?.image as SanityImage}
+                  className="w-full h-full object-cover"
+                />
+              )}
               <img className={styles.overlay} />
-                <div
-                  className={`${styles.button}`}
+              <div className={`${styles.button}`}>
+                <button
+                  className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
                 >
-                  <button
-                    className={`btn-primary w-[300px] btn-primary-hover-de z-3 `}
-                  >
-                    Special Editions Ansehen
-                  </button>
-                </div>
-            </div>
-          </Link>
+                  {locale === "de" ? "Special Editions Ansehen" : "View Special Editions"}
+                </button>
+              </div>
+            </NextLink>
+          </section>
         ))}
       </div>
     </section>

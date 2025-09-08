@@ -7,9 +7,10 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 // import instaData from "@/Data/instaData";
-import type { DieInstagram } from "@/lib";
+import type { DieInstagram, SanityImage } from "@/lib";
 import { ColoredText } from "../ui/ColoredText";
-import Link from "next/link";
+import NextLink from "../NextLink";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const InstagramPost = ({
   title,
   description,
@@ -49,11 +50,15 @@ const InstagramPost = ({
                     className="basis-1/2 md:basis-1/3 lg:basis-1/4  xl:basis-1/5"
                   >
                     {image && (
-                      <Link target="_blank" href={`${item?.link}`}>
+                      <NextLink target="_blank" href={`${item?.link}`}>
                         <div className="flex">
-                          <img src={`${image?.url}`} alt={`${image?.alt}`} />
+                          {/* <img src={`${image?.url}`} alt={`${image?.alt}`} /> */}
+                          <OptimizedImage
+                            image={image as SanityImage}
+                            className="w-full h-full object-cover"
+                          />
                         </div>
-                      </Link>
+                      </NextLink>
                     )}
                   </CarouselItem>
                 );

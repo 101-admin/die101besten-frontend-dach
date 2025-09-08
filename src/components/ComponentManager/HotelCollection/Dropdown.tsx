@@ -12,6 +12,8 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { HotelCategory, HotelCity } from "@/lib";
+import { useParams } from "next/navigation";
+import { ColoredText } from "@/components/ui/ColoredText";
 
 const DropdownContent = ({
   totalHotels,
@@ -24,6 +26,8 @@ const DropdownContent = ({
 }) => {
   const router = useRouter();
   const searchParams = useSearchParams();
+  const params = useParams();
+  const locale = params.locale;
   const [searchValue, setSearchValue] = useState(
     searchParams.get("search") || ""
   );
@@ -64,10 +68,17 @@ const DropdownContent = ({
           </h4>
         </div> */}
         <h1 className="font-ogg font-normal text-[25px] sm:text-[30px] md:text-[38px] lg:text-[48px] leading-[28px] sm:leading-[35px] md:leading-[43px] lg:leading-[52px] mb-5">
-          Die 101 besten Hotels{" "}
+          <ColoredText
+            text={
+              locale === "de"
+                ? "Die 101 besten Hotels #DACH-Region & Südtirol#"
+                : "The 101 best hotels #DACH-Region & South Tyrol#"
+            }
+          />
+          {/* Die 101 besten Hotels{" "}
           <span className="bg-gradient-to-r from-[#866A41] to-[#866A41] bg-clip-text text-transparent">
             DACH-Region & Südtirol
-          </span>
+          </span> */}
         </h1>
         <div
           className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 xl:grid-cols-4`}
@@ -85,18 +96,20 @@ const DropdownContent = ({
               }}
             >
               <SelectTrigger>
-                <SelectValue placeholder="DACH + Südtirol" />
+                <SelectValue
+                  placeholder={locale === "de" ? "DACH + Südtirol" : "DACH-region"}
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="https://die-new.vercel.app/hotels">
-                    Deutschland
+                    {locale === "de" ? "Deutschland" : "Germany"}
                   </SelectItem>
                   <SelectItem value="https://die101besten-frontend-dach-steel.vercel.app/hotels">
-                    DACH + Südtirol
+                    {locale === "de" ? "DACH + Südtirol" : "DACH-region"}
                   </SelectItem>
                   <SelectItem value="https://die101besten-frontend-ch-eight.vercel.app/hotels">
-                    Schweiz
+                    {locale === "de" ? "Schweiz" : "Switzerland"}
                   </SelectItem>
                 </SelectGroup>
               </SelectContent>
@@ -113,11 +126,17 @@ const DropdownContent = ({
               onValueChange={(value) => updateSearchParams("segment", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Alle Segmente" />
+                <SelectValue
+                  placeholder={
+                    locale === "de" ? "Alle Segmente" : "All Segments"
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="bittewählen">Alle Segmente</SelectItem>
+                  <SelectItem value="bittewählen">
+                    {locale === "de" ? "Alle Segmente" : "All Segments"}
+                  </SelectItem>
                   <SelectItem value="leisure">Leisure</SelectItem>
                   <SelectItem value="business">Business</SelectItem>
                 </SelectGroup>
@@ -126,19 +145,23 @@ const DropdownContent = ({
           </div>
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
-              Kategorie
+              {locale === "de" ? "Kategorie" : "Category"}
             </h3>
             <Select
               defaultValue={searchParams.get("category") || ""}
               onValueChange={(value) => updateSearchParams("category", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Alle Kategorien" />
+                <SelectValue
+                  placeholder={
+                    locale === "de" ? "Alle Kategorien" : "All Categories"
+                  }
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
                   <SelectItem value="AlleKategorien">
-                    Alle Kategorien
+                    {locale === "de" ? "Alle Kategorien" : "All Categories"}
                   </SelectItem>
                   {categories?.map((category) => (
                     <SelectItem key={category?._id} value={category?.value}>
@@ -151,18 +174,22 @@ const DropdownContent = ({
           </div>
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
-              Stadt
+            {locale === "de" ? "Stadt" : "City"}
             </h3>
             <Select
               defaultValue={searchParams.get("city") || ""}
               onValueChange={(value) => updateSearchParams("city", value)}
             >
               <SelectTrigger>
-                <SelectValue placeholder="Alle Städte" />
+                <SelectValue
+                  placeholder={locale === "de" ? "Alle Städte" : "All Cities"}
+                />
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup>
-                  <SelectItem value="alleStädte">Alle Städte</SelectItem>
+                  <SelectItem value="alleStädte">
+                    {locale === "de" ? "Alle Städte" : "All Cities"}
+                  </SelectItem>
                   {cities?.map((city) => (
                     <SelectItem key={city._id} value={city?.value}>
                       {city?.label}
@@ -183,7 +210,7 @@ const DropdownContent = ({
                   handleSearch(e.target.value);
                 }}
                 type="text"
-                placeholder="Suchen"
+                placeholder={locale === "de" ? "Suchen" : "Search"}
                 className="w-full h-full border-2 border-black relative text-[16px] font-montserrat font-bold pl-14 placeholder:text-black uppercase"
               />
               <div className="absolute left-4 top-5 text-[24px]">

@@ -1,8 +1,9 @@
 import React from "react";
-import type { ShapingFuture } from "@/lib";
+import type { SanityImage, ShapingFuture } from "@/lib";
 import { PortableText } from "@/lib/components/PortableText";
-import Link from "next/link";
+import NextLink from "../NextLink";
 import { ColoredText } from "../ui/ColoredText";
+import { OptimizedImage } from "../ui/OptimizedImage";
 const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
   return (
     <section
@@ -17,14 +18,20 @@ const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
         )}
         <div className="w-full flex flex-col justify-center items-center lg:flex-row gap-10">
           <div className="flex w-full">
-            {image && <img src={`${image?.url}`} alt={`${image?.url}`} />}
+            {image && (
+              // <img src={`${image?.url}`} alt={`${image?.url}`} />
+              <OptimizedImage
+                image={image as SanityImage}
+                className="w-full h-full object-cover"
+              />
+            )}
           </div>
           <div className="w-full flex flex-col justify-start items-baseline">
             <div className="w-full text-[18px] sm:text-[18px] lg:text-[20px] font-gte font-light">
               {body && <PortableText value={body} />}
             </div>
             {ctaButton && (
-              <Link
+              <NextLink
                 target="_blank"
                 className="mt-6 lg:mt-12"
                 href={`${ctaButton?.buttonLink}`}
@@ -32,7 +39,7 @@ const ShapeFuture = ({ title, body, image, ctaButton, id }: ShapingFuture) => {
                 <button className="btn-secondary w-[234px] text-black border-black btn-secondary-hover-de">
                   {ctaButton?.buttonText}
                 </button>
-              </Link>
+              </NextLink>
             )}
           </div>
         </div>

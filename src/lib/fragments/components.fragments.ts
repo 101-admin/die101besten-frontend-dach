@@ -1,8 +1,4 @@
-import {
-  globalImageFragment,
-  globalButtonFragment,
-  globalImageFields,
-} from "./global.fragments";
+import { globalImageFragment, globalButtonFragment } from "./global.fragments";
 
 export const heroSliderComponentFragment = `
   _id,
@@ -38,7 +34,7 @@ export const heroSliderComponentFragment = `
     imageGallery {
       enabled,
       images[] {
-        ${globalImageFields},
+        ${globalImageFragment},
         caption
       }
     }
@@ -308,7 +304,7 @@ export const aboutTestimonialsComponentFragment = `
   id,
   slider[] {
     image {
-      ${globalImageFields},
+      ${globalImageFragment},
       alt,
       caption
     },
@@ -389,7 +385,7 @@ export const allHotelsSliderComponentFragment = `
     imageGallery {
       enabled,
       images[] {
-        ${globalImageFields},
+        ${globalImageFragment},
         caption,
         link,
         linkText,
@@ -432,6 +428,8 @@ export const strategischePartnerComponentFragment = `
   language,
   partners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link,
   }
 `;
@@ -443,6 +441,8 @@ export const medienPartnerComponentFragment = `
   language,
   partners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link,
   }
 `;
@@ -454,14 +454,20 @@ export const partnerComponentFragment = `
   title,
   partners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link
   },
   premiumPartners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link
   },
   otherPartners[] {
     image {${globalImageFragment}},
+    title,
+    description,
     link
   }
 `;
@@ -508,9 +514,7 @@ export const specialHotelsComponentFragment = `
   }
 `;
 
-
 //events page Fragments
-
 
 export const eventsHeroComponentFragment = `
   _id,
@@ -518,7 +522,6 @@ export const eventsHeroComponentFragment = `
   title,
   language,
 `;
-
 
 export const eventCollectionComponentFragment = `
   _id,
