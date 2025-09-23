@@ -3,9 +3,13 @@ import UpcommingEvents from "./UpcommingEvents";
 import PastEvents from "./PastEvents";
 import { EventsApi } from "@/lib/services/api/events.api";
 import type { EventCollection } from "@/lib";
-const EventCollection = async ({ id }: EventCollection) => {
-  const events = await EventsApi.getAllEvents();
-  // console.log(events , "Success events")
+
+interface EventCollectionProps extends EventCollection {
+  locale: string;
+}
+
+const EventCollection = async ({ id, locale }: EventCollectionProps) => {
+  const events = await EventsApi.getAllEvents(locale);
   return (
     <section id={id}>
       <UpcommingEvents events={events} />
