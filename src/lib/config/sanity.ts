@@ -14,6 +14,21 @@ export const client = createClient({
   stega: {
     studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL,
   },
+  requestTagPrefix: "sanity",
+  timeout: 10000, // 10 second timeout
+});
+
+export const previewClient = createClient({
+  projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID,
+  dataset: process.env.NEXT_PUBLIC_SANITY_DATASET || "production",
+  apiVersion: "2024-05-01",
+  useCdn: false, // Always use live data for preview
+  token: process.env.SANITY_API_TOKEN,
+  stega: {
+    studioUrl: process.env.NEXT_PUBLIC_SANITY_STUDIO_URL,
+  },
+  // Optimized for preview mode
+  timeout: 5000, // Shorter timeout for preview
 });
 
 /**
