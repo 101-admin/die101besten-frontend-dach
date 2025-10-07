@@ -9,7 +9,7 @@ import { werde101ComponentFragment } from "../fragments/components.fragments";
 import { dasBushComponentFragment } from "../fragments/components.fragments";
 import { newsletterComponentFragment } from "../fragments/components.fragments";
 import { seoFragment } from "../fragments/global.fragments";
-export const partnersQuery = `*[_type == "partners" && language == $language  && edition == $edition][0] {
+export const partnersQuery = `*[_type == "partners" && language == $language  && edition == $edition && !(_id in path("drafts.**"))][0] {
   _id,
   _type,
   title,
