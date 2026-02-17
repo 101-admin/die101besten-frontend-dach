@@ -10,7 +10,7 @@ const HotelDescription = ({
     <section className="w-full max-w-[1920px] mx-auto py-10 sm:py-16 md:py-20 lg:py-28">
       {/* Image Section */}
       <div className="w-full">
-        <div className="w-full relative">
+        <div className="w-full h-[300px] sm:h-[400px] md:h-[600px] relative">
           {fullwidthImage && (
             // <img
             //   className="w-full h-full object-cover"
@@ -20,7 +20,7 @@ const HotelDescription = ({
 
             <OptimizedImage
               image={fullwidthImage as SanityImage}
-              className="w-full h-[revert-layer] object-cover"
+              className="w-full h-full object-cover"
               // width={1920}
               // height={300}
               priority

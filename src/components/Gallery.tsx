@@ -35,7 +35,7 @@ export default function Gallery({
           // />
           <OptimizedImage
             image={image as SanityImage}
-            className="object-cover w-full h-[revert-layer]"
+            className="object-cover w-full h-full"
             width={1440}
             height={600}
             priority

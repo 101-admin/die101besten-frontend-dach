@@ -40,7 +40,7 @@ export const OptimizedImage = ({
   if (fill) {
     return (
       <div className={cn("relative w-full object-cover", wrapperClassName)}>
-        <Image {...commonProps} fill />
+        <Image {...commonProps} />
       </div>
     );
   }

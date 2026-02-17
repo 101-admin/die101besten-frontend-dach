@@ -72,8 +72,7 @@ export function getAllHotelsQuery(filters: {
   let filterString = `
     _type == "hotel" &&
     edition == "${filters.edition}" &&
-    language == "${filters.language}" &&
-    !(_id in path("drafts.**"))
+    language == "${filters.language}"
   `;
 
   // Add other filters
@@ -120,7 +119,6 @@ export function getAllHotelsQuery(filters: {
     _type == "hotel" &&
     edition == "${filters.edition}" &&
     language == "${filters.language}" &&
-    !(_id in path("drafts.**")) &&
     ${filters.variant ? `variant == "${filters.variant}"` : "true"}
   `;
 
@@ -185,8 +183,7 @@ export function getAllSearchHotelsQuery(filters: {
   let filterString = `
     _type == "hotel" &&
     edition == "${filters.edition}" &&
-    language == "${filters.language}" &&
-    !(_id in path("drafts.**"))
+    language == "${filters.language}"
   `;
 
   // Create search conditions
@@ -223,7 +220,7 @@ export function getAllSearchHotelsQuery(filters: {
 }
 
 export const getAllHotelsForSiteMap = `
-  *[_type == "hotel" && edition == $edition && !(_id in path("drafts.**"))] {
+  *[_type == "hotel" && edition == $edition] {
     _id,
     _type,
     "slug": slug.current,
@@ -236,7 +233,7 @@ export const getAllHotelsForSiteMap = `
  * Query for getting a single hotel by slug with all details
  */
 export const getHotelBySlugQuery = `
-  *[_type == "hotel" && slug.current == $slug && edition == $edition && language == $language && !(_id in path("drafts.**"))][0] {
+  *[_type == "hotel" && slug.current == $slug && edition == $edition && language == $language][0] {
     _id,
     _type,
     language,
@@ -412,7 +409,7 @@ export const getHotelBySlugQuery = `
  * Query for getting all hotels page with components
  */
 export const getHotelPageQuery = `
-  *[_type == "allHotels" && language == $language && edition == $edition && !(_id in path("drafts.**"))][0] {
+  *[_type == "allHotels" && language == $language && edition == $edition][0] {
     _id,
     _type,
     title,
@@ -439,7 +436,7 @@ export const getHotelPageQuery = `
  * Query for getting special edition hotels page with components
  */
 export const getSpecialEditionHotelsQuery = `
-  *[_type == "specialEditionHotels" && language == $language && edition == $edition && !(_id in path("drafts.**"))][0] {
+  *[_type == "specialEditionHotels" && language == $language && edition == $edition][0] {
     _id,
     _type,
     title,
@@ -466,7 +463,7 @@ export const getSpecialEditionHotelsQuery = `
  * Query for getting all hotel categories
  */
 export const getHotelCategoriesQuery = `
-  *[_type == "hotelCategory" && $edition in edition && language == $language && !(_id in path("drafts.**"))] | order(label asc) {
+  *[_type == "hotelCategory" && $edition in edition && language == $language] | order(label asc) {
     _id,
     label,
     "value": value.current,
@@ -474,7 +471,7 @@ export const getHotelCategoriesQuery = `
   }
 `;
 
-export const getCitiesQuery = `*[_type == "city" && $edition in edition && !(_id in path("drafts.**"))] {
+export const getCitiesQuery = `*[_type == "city" && $edition in edition] {
   _id,
   label,
   "value": value.current,
