@@ -38,6 +38,7 @@ const HotelBasic = ({ hotel }: { hotel: Hotel }) => {
           hotelId={hotel?._id}
           name={hotel?.name}
           address={hotel?.address}
+          location={hotel?.location}
           ctaButton={hotel?.ctaButton}
           mapSection={hotel.mapSection}
         />

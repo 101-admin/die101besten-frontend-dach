@@ -10,6 +10,18 @@ body {
   color: hsl(var(--foreground));
 }
 
+.hotel-marker {
+  width: 50px;
+  height: 50px;
+  padding: px;
+  background: linear-gradient(135deg, #866a41, #bca679);
+  border-radius: 50%;
+  cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.25);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 
 @layer base {
   :root {
@@ -101,8 +113,14 @@ body {
     position: absolute;
     inset: 0;
     padding: 2px; /* border width */
-    background: linear-gradient(90deg, var(--color-dach-primary-300) 0.21%, var(--color-dach-primary-500) 100%);
-    mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    background: linear-gradient(
+      90deg,
+      var(--color-dach-primary-300) 0.21%,
+      var(--color-dach-primary-500) 100%
+    );
+    mask:
+      linear-gradient(#fff 0 0) content-box,
+      linear-gradient(#fff 0 0);
     mask-composite: exclude;
     pointer-events: none;
   }

@@ -265,7 +265,13 @@ export interface Hotel extends BaseDocument {
   interviewSection?: HotelInterviewSection;
   hotelHighlights?: HotelHighlights;
   mapSection?: HotelMapSection;
+  location?: HotelLocation;
   adds?: Adds;
+}
+
+export interface HotelLocation {
+  lat: number;
+  lng: number;
 }
 
 export interface Adds {

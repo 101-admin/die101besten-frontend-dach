@@ -2,9 +2,9 @@
 
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
-import type { FeatureCollection, Point } from "geojson";
+// import type { FeatureCollection, Point } from "geojson";
 import "mapbox-gl/dist/mapbox-gl.css";
-import { CTAButton, HotelAddress, HotelMapSection } from "@/lib";
+import { CTAButton, HotelAddress, HotelMapSection, HotelLocation } from "@/lib";
 
 interface HotelMapProps {
   hotelId: string;
@@ -12,6 +12,7 @@ interface HotelMapProps {
   name?: string;
   address?: HotelAddress;
   ctaButton?: CTAButton;
+  location?: HotelLocation;
 }
 
 const HotelMap: React.FC<HotelMapProps> = ({
@@ -20,101 +21,187 @@ const HotelMap: React.FC<HotelMapProps> = ({
   name,
   address,
   ctaButton,
+  location,
 }) => {
   console.log("[HotelMap] hotelId ", hotelId);
   const mapContainer = useRef<HTMLDivElement>(null);
   const map = useRef<mapboxgl.Map | null>(null);
   const [mapError, setMapError] = useState<string | null>(null);
   const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
-  const processedRef = useRef(false);
+  // const processedRef = useRef(false);
+
+  // useEffect(() => {
+  //   if (!mapContainer.current) return;
+
+  //   mapboxgl.accessToken = accessToken;
+
+  //   // Fetch the GeoJSON data
+  //   fetch("/all-hotels.geojson")
+  //     .then((res) => res.json())
+  //     .then((geojson: FeatureCollection<Point>) => {
+  //       console.log("geojson ", geojson);
+  //       const newMap = new mapboxgl.Map({
+  //         container: mapContainer.current!,
+  //         style: "mapbox://styles/101-admin/cma1ja8u501qs01r38b786w3r",
+  //         // style: 'mapbox://styles/101-admin/cma3kotho000e01s395d0hds0', // Switzerland style
+  //         //   style: "mapbox://styles/101-admin/cma3kt1a5000i01sl2xgs9hvl", // DACH style
+  //       });
+
+  //       const handleSourceData = () => {
+  //         processedRef.current = true; // Mark as processed using ref
+
+  //         // Filter for the specific hotel
+  //         const hotelFeature = geojson.features.find(
+  //           (feature) => feature.properties?._id == hotelId
+  //         );
+
+  //         if (hotelFeature) {
+  //           console.log("Found hotel:", hotelFeature);
+  //           // Ensure the map is ready before flying
+  //           setTimeout(() => {
+  //             const coordinates: [number, number] = [
+  //               hotelFeature.geometry.coordinates[0],
+  //               hotelFeature.geometry.coordinates[1],
+  //             ];
+  //             newMap.flyTo({
+  //               center: coordinates,
+  //               zoom: 16,
+  //               essential: true,
+  //               padding: { top: 200, bottom: 200, left: 0, right: 0 },
+  //             });
+  //           }, 500); // Small delay to ensure map is ready
+  //         } else {
+  //           console.error("No features found for hotel:", hotelId);
+  //           setMapError("Hotel location not found");
+  //         }
+
+  //         // Remove listener after processing
+  //         newMap.off("sourcedata", handleSourceData);
+  //       };
+
+  //       newMap.on("load", () => {
+  //         try {
+  //           // Initial bounds for Germany
+  //           newMap.fitBounds([
+  //             [6.09, 47.46],
+  //             [14.99, 54.91],
+  //           ]);
+  //           // Initial bounds for Switzerland
+  //           // newMap.fitBounds([
+  //           //   [4.875525425346581, 45.80985660548447],
+  //           //   [11.407097104079043, 47.80530295907303],
+  //           // ]);
+  //           // Initial bounds for DACH
+  //           // newMap.fitBounds([
+  //           //   [-7.788671450024509, 45.2405455760678],
+  //           //   [25.706106177687502, 54.60003042258725],
+  //           // ]);
+
+  //           // Add sourcedata listener after fitBounds
+  //           newMap.on("sourcedata", handleSourceData);
+  //         } catch (error) {
+  //           console.error("Error setting up map:", error);
+  //           setMapError("Error configuring map");
+  //         }
+  //       });
+
+  //       map.current = newMap;
+  //       return () => {
+  //         processedRef.current = false; // Reset the ref on cleanup
+  //         newMap.off("sourcedata", handleSourceData);
+  //         map.current?.remove();
+  //       };
+  //     })
+  //     .catch((err) => {
+  //       setMapError("Failed to load hotel data");
+  //       console.error(err);
+  //     });
+  // }, [hotelId, accessToken]);
 
   useEffect(() => {
     if (!mapContainer.current) return;
 
+    // Check if location prop is provided
+    if (!location?.lat || !location?.lng) {
+      setMapError("Hotel location not provided");
+      return;
+    }
+
+    const googleMapsUrl = `https://www.google.com/maps?q=${location.lat},${location.lng}`;
+
     mapboxgl.accessToken = accessToken;
 
-    // Fetch the GeoJSON data
-    fetch("/all-hotels.geojson")
-      .then((res) => res.json())
-      .then((geojson: FeatureCollection<Point>) => {
-        console.log("geojson ", geojson);
-        const newMap = new mapboxgl.Map({
-          container: mapContainer.current!,
-          // style: "mapbox://styles/101-admin/cma1ja8u501qs01r38b786w3r",
-          // style: 'mapbox://styles/101-admin/cma3kotho000e01s395d0hds0', // Switzerland style
-          style: "mapbox://styles/101-admin/cma3kt1a5000i01sl2xgs9hvl", // DACH style
-        });
+    const newMap = new mapboxgl.Map({
+      container: mapContainer.current!,
+      // style: "mapbox://styles/101-admin/cma1ja8u501qs01r38b786w3r",
+      // style: 'mapbox://styles/101-admin/cma3kotho000e01s395d0hds0', // Switzerland style
+      style: "mapbox://styles/101-admin/cma3kt1a5000i01sl2xgs9hvl", // DACH style
+    });
 
-        const handleSourceData = () => {
-          processedRef.current = true; // Mark as processed using ref
+    const markerEl = document.createElement("div");
+    markerEl.className = "hotel-marker";
+    markerEl.innerHTML = `
+  <svg
+    width="40"
+    height="40"
+    viewBox="0 0 24 24"
+    fill="white"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5S10.62 6.5 12 6.5s2.5 1.12 2.5 2.5S13.38 11.5 12 11.5z"/>
+  </svg>
+`;
 
-          // Filter for the specific hotel
-          const hotelFeature = geojson.features.find(
-            (feature) => feature.properties?._id == hotelId
-          );
+    const marker = new mapboxgl.Marker(markerEl)
+      .setLngLat([location.lng, location.lat])
+      .addTo(newMap);
 
-          if (hotelFeature) {
-            console.log("Found hotel:", hotelFeature);
-            // Ensure the map is ready before flying
-            setTimeout(() => {
-              const coordinates: [number, number] = [
-                hotelFeature.geometry.coordinates[0],
-                hotelFeature.geometry.coordinates[1],
-              ];
-              newMap.flyTo({
-                center: coordinates,
-                zoom: 16,
-                essential: true,
-                padding: { top: 200, bottom: 200, left: 0, right: 0 },
-              });
-            }, 500); // Small delay to ensure map is ready
-          } else {
-            console.error("No features found for hotel:", hotelId);
-            setMapError("Hotel location not found");
-          }
+    newMap.on("load", () => {
+      try {
+        // Initial bounds for Germany
+        newMap.fitBounds([
+          [6.09, 47.46],
+          [14.99, 54.91],
+        ]);
+        // Initial bounds for Switzerland
+        // newMap.fitBounds([
+        //   [4.875525425346581, 45.80985660548447],
+        //   [11.407097104079043, 47.80530295907303],
+        // ]);
+        // Initial bounds for DACH
+        // newMap.fitBounds([
+        //   [-7.788671450024509, 45.2405455760678],
+        //   [25.706106177687502, 54.60003042258725],
+        // ]);
 
-          // Remove listener after processing
-          newMap.off("sourcedata", handleSourceData);
-        };
+        // Fly to the hotel location from props
+        setTimeout(() => {
+          const coordinates: [number, number] = [location.lng, location.lat];
+          console.log("Flying to hotel location:", coordinates);
+          newMap.flyTo({
+            center: coordinates,
+            zoom: 16,
+            essential: true,
+            padding: { top: 200, bottom: 200, left: 0, right: 0 },
+          });
+        }, 500); // Small delay to ensure map is ready
+      } catch (error) {
+        console.error("Error setting up map:", error);
+        setMapError("Error configuring map");
+      }
+    });
 
-        newMap.on("load", () => {
-          try {
-            // Initial bounds for Germany
-            newMap.fitBounds([
-              [6.09, 47.46],
-              [14.99, 54.91],
-            ]);
-            // Initial bounds for Switzerland
-            // newMap.fitBounds([
-            //   [4.875525425346581, 45.80985660548447],
-            //   [11.407097104079043, 47.80530295907303],
-            // ]);
-            // Initial bounds for DACH
-            // newMap.fitBounds([
-            //   [-7.788671450024509, 45.2405455760678],
-            //   [25.706106177687502, 54.60003042258725],
-            // ]);
+    marker.getElement().addEventListener("click", () => {
+      window.open(googleMapsUrl, "_blank");
+    });
 
-            // Add sourcedata listener after fitBounds
-            newMap.on("sourcedata", handleSourceData);
-          } catch (error) {
-            console.error("Error setting up map:", error);
-            setMapError("Error configuring map");
-          }
-        });
+    map.current = newMap;
 
-        map.current = newMap;
-        return () => {
-          processedRef.current = false; // Reset the ref on cleanup
-          newMap.off("sourcedata", handleSourceData);
-          map.current?.remove();
-        };
-      })
-      .catch((err) => {
-        setMapError("Failed to load hotel data");
-        console.error(err);
-      });
-  }, [hotelId, accessToken]);
+    return () => {
+      map.current?.remove();
+      marker.remove();
+    };
+  }, [location, accessToken]);
 
   return (
     <section className="w-full lg:max-w-[1920px] flex flex-col justify-center items-center gap-8 pt-20 pb-0 md:py-32">
