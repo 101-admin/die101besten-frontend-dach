@@ -198,7 +198,7 @@ export interface HotelAddress {
 /**
  * Main Hotel interface
  */
-export type HotelSegment = "leisure" | "business";
+// export type HotelSegment = "leisure" | "business";
 
 export interface HotelCategory {
   _id: string;
@@ -241,7 +241,7 @@ export interface Hotel extends BaseDocument {
   variant: HotelVariant;
   isPackageBooked?: boolean;
   hotelType?: HotelType;
-  segment?: HotelSegment;
+  // segment?: HotelSegment;
   category?: HotelCategory;
   address?: HotelAddress;
   tags?: string[];

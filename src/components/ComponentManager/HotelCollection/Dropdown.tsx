@@ -81,7 +81,7 @@ const DropdownContent = ({
           </span> */}
         </h1>
         <div
-          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3  gap-6 xl:grid-cols-4`}
+          className={`w-full grid grid-cols-1  md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-3 gap-6`}
         >
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
@@ -117,7 +117,7 @@ const DropdownContent = ({
               </SelectContent>
             </Select>
           </div>
-          <div
+          {/* <div
             className={`w-full flex flex-col justify-start items-baseline gap-1`}
           >
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
@@ -144,7 +144,7 @@ const DropdownContent = ({
                 </SelectGroup>
               </SelectContent>
             </Select>
-          </div>
+          </div> */}
           <div className="w-full flex flex-col justify-start items-baseline gap-1">
             <h3 className="text-[18px] font-montserrat font-semibold px-1">
               {locale === "de" ? "Kategorie" : "Category"}
