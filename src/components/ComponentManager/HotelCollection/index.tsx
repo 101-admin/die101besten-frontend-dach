@@ -21,7 +21,7 @@ const HotelCollection = async ({
     language: DEFAULT_LANGUAGE,
     category: searchParams.category,
     city: searchParams?.city,
-    segment: searchParams?.segment,
+    // segment: searchParams?.segment,
     search: searchParams?.search,
     variant: variant,
   });

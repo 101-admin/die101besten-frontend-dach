@@ -60,7 +60,7 @@ export function getAllHotelsQuery(filters: {
   language: string;
   category?: string;
   city?: string;
-  segment?: string;
+  // segment?: string;
   hotelType?: string;
   rankingCategory?: string;
   search?: string;
@@ -83,9 +83,9 @@ export function getAllHotelsQuery(filters: {
   if (!!filters?.city) {
     filterString += ` && address->city->value.current == "${filters.city}"`;
   }
-  if (!!filters?.segment) {
-    filterString += ` && segment == "${filters.segment}"`;
-  }
+  // if (!!filters?.segment) {
+  //   filterString += ` && segment == "${filters.segment}"`;
+  // }
   if (!!filters?.hotelType) {
     filterString += ` && hotelType == "${filters.hotelType}"`;
   }
@@ -145,7 +145,6 @@ export function getAllHotelsQuery(filters: {
           position,
           category
         },
-        segment,
         "category": category->{
           _id,
           label,
@@ -257,7 +256,6 @@ export const getHotelBySlugQuery = `
       position,
       category
     },
-    segment,
     "category": category->{
       _id,
       label,

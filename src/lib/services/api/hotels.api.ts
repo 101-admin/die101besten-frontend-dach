@@ -1,5 +1,10 @@
 import { unstable_cache } from "next/cache";
-import { client, previewClient, DEFAULT_EDITION, DEFAULT_LANGUAGE } from "@/lib/config/sanity";
+import {
+  client,
+  previewClient,
+  DEFAULT_EDITION,
+  DEFAULT_LANGUAGE,
+} from "@/lib/config/sanity";
 import { ensureSlugHasLocaleSuffix } from "@/lib/utils";
 import {
   getAllHotelsQuery,
@@ -9,7 +14,7 @@ import {
   getHotelCategoriesQuery,
   getCitiesQuery,
   getAllSearchHotelsQuery,
-  getAllHotelsForSiteMap
+  getAllHotelsForSiteMap,
 } from "@/lib/queries/hotels.queries";
 
 export const HotelsApi = {
@@ -22,7 +27,7 @@ export const HotelsApi = {
       language = DEFAULT_LANGUAGE,
       category,
       city,
-      segment,
+      // segment,
       search,
       rankingCategory,
       variant,
@@ -33,11 +38,11 @@ export const HotelsApi = {
           language,
           category,
           city,
-          segment,
+          // segment,
           search,
           rankingCategory,
           variant,
-        }).filter(([_, v]) => v !== undefined && v !== null)
+        }).filter(([_, v]) => v !== undefined && v !== null),
       );
       return await client.fetch(
         getAllHotelsQuery({
@@ -45,16 +50,16 @@ export const HotelsApi = {
           language,
           category,
           city,
-          segment,
+          // segment,
           search,
           rankingCategory,
           variant,
         }),
-        params
+        params,
       );
     },
     ["all-hotels"],
-    { tags: ["hotels"], revalidate: 25 }
+    { tags: ["hotels"], revalidate: 25 },
   ),
   getAllSearchHotels: unstable_cache(
     async ({
@@ -67,7 +72,7 @@ export const HotelsApi = {
           edition,
           language,
           search,
-        }).filter(([_, v]) => v !== undefined && v !== null)
+        }).filter(([_, v]) => v !== undefined && v !== null),
       );
       return await client.fetch(
         getAllSearchHotelsQuery({
@@ -75,11 +80,11 @@ export const HotelsApi = {
           language,
           search,
         }),
-        params
+        params,
       );
     },
     ["all-hotels"],
-    { tags: ["hotels"], revalidate: 25 }
+    { tags: ["hotels"], revalidate: 25 },
   ),
 
   getAllHotelsForSiteMap: unstable_cache(
@@ -89,7 +94,7 @@ export const HotelsApi = {
       });
     },
     ["all-hotels"],
-    { tags: ["hotels"], revalidate: 25 }
+    { tags: ["hotels"], revalidate: 25 },
   ),
 
   /**
@@ -107,7 +112,7 @@ export const HotelsApi = {
       });
     },
     ["hotel-by-slug"],
-    { tags: ["hotels"], revalidate: 25 }
+    { tags: ["hotels"], revalidate: 25 },
   ),
 
   getHotelPage: unstable_cache(
@@ -118,7 +123,7 @@ export const HotelsApi = {
       });
     },
     ["hotel-page"],
-    { tags: ["hotels"], revalidate: 25 }
+    { tags: ["hotels"], revalidate: 25 },
   ),
 
   getSpecialEditionHotels: unstable_cache(
@@ -129,7 +134,7 @@ export const HotelsApi = {
       });
     },
     ["special-edition-hotels"],
-    { tags: ["hotels"], revalidate: 25 }
+    { tags: ["hotels"], revalidate: 25 },
   ),
 
   /**
@@ -147,7 +152,7 @@ export const HotelsApi = {
       });
     },
     ["hotel-categories"],
-    { tags: ["hotels", "categories"], revalidate: 25 }
+    { tags: ["hotels", "categories"], revalidate: 25 },
   ),
 
   /**
@@ -160,30 +165,42 @@ export const HotelsApi = {
       });
     },
     ["cities"],
-    { tags: ["hotels", "cities"], revalidate: 25 }
+    { tags: ["hotels", "cities"], revalidate: 25 },
   ),
-    getHotelPagePreview: async (language = DEFAULT_LANGUAGE) => {
-      return previewClient.fetch(getHotelPageQuery, { language, edition: DEFAULT_EDITION }, {
+  getHotelPagePreview: async (language = DEFAULT_LANGUAGE) => {
+    return previewClient.fetch(
+      getHotelPageQuery,
+      { language, edition: DEFAULT_EDITION },
+      {
         perspective: "drafts",
         useCdn: false,
         stega: true,
-      } as any);
-    },
+      } as any,
+    );
+  },
 
-    getSpecialEditionHotelsPreview: async (language = DEFAULT_LANGUAGE) => {
-      return previewClient.fetch(getSpecialEditionHotelsQuery, { language, edition: DEFAULT_EDITION }, {
+  getSpecialEditionHotelsPreview: async (language = DEFAULT_LANGUAGE) => {
+    return previewClient.fetch(
+      getSpecialEditionHotelsQuery,
+      { language, edition: DEFAULT_EDITION },
+      {
         perspective: "drafts",
         useCdn: false,
         stega: true,
-      } as any);
-    },
-  
-    getHotelBySlugPreview: async (slug: string, language = DEFAULT_LANGUAGE) => {
-       const slugWithLocale = ensureSlugHasLocaleSuffix(slug, language);
-      return previewClient.fetch(getHotelBySlugQuery, { slug: slugWithLocale, language, edition: DEFAULT_EDITION }, {
+      } as any,
+    );
+  },
+
+  getHotelBySlugPreview: async (slug: string, language = DEFAULT_LANGUAGE) => {
+    const slugWithLocale = ensureSlugHasLocaleSuffix(slug, language);
+    return previewClient.fetch(
+      getHotelBySlugQuery,
+      { slug: slugWithLocale, language, edition: DEFAULT_EDITION },
+      {
         perspective: "drafts",
         useCdn: false,
         stega: true,
-      } as any);
-    },
+      } as any,
+    );
+  },
 };

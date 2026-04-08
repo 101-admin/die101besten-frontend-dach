@@ -37,7 +37,7 @@ const SingleHotel = ({ data, srNo = "ranking" }: SingleHotelProps) => {
           className="w-full h-[420px] flex justify-start items-baseline p-5 sm:p-10 bg-cover bg-no-repeat bg-center "
         >
           <div className="p-10 flex flex-col justify-start items-baseline bg-[#FFFFFF8C] w-full max-w-[460px] gap-5 backdrop-blur-[15px]">
-            {data?.segment === "leisure" && (
+            {/* {data?.segment === "leisure" && (
               <div className="h-[32px] flex justify-center items-center text-[14px] font-montserrat font-bold bg-gradient-to-br from-[#0C2432] to-[#37CA60] px-4 text-white rounded-lg uppercase">
                 {data?.segment}
               </div>
@@ -46,7 +46,7 @@ const SingleHotel = ({ data, srNo = "ranking" }: SingleHotelProps) => {
               <div className="h-[32px] flex justify-center items-center text-[14px] font-montserrat font-bold bg-gradient-to-br from-[#0C2432] to-[#FF1640] px-4 text-white rounded-lg uppercase">
                 {data?.segment}
               </div>
-            )}
+            )} */}
             {data?.name && (
               <h1 className="text-[28px] leading-[32px] md:text-[38px] md:leading-[42px] font-ogg font-normal">
                 {data?.name}
